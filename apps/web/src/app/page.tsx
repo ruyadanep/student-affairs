@@ -1,4 +1,5 @@
 import { getHero, getNotices } from "@/lib/sanity";
+import { units } from "@/lib/units";
 const services = [
   ["Hostel accommodation", "Apply, check payment status, and see your allocation.", "/hostels"],
   ["Clearance", "Track every unit you need to be cleared by.", "/clearance"],
@@ -18,6 +19,9 @@ export default async function Home() {
     <main id="services"><h2>Student Affairs services</h2>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(16rem,1fr))", gap: "1rem" }}>
         {services.map(([t, d, h]) => (<a key={h} href={h} className="card" style={{ margin: 0, textDecoration: "none", color: "var(--ink)" }}><strong style={{ color: "var(--brand)" }}>{t}</strong><p style={{ margin: ".3rem 0 0" }}>{d}</p></a>))}</div>
+      <h2 style={{ marginTop: "2.5rem" }}>Our units</h2>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(14rem,1fr))", gap: "1rem" }}>
+        {units.map((u) => (<a key={u.slug} href={`/units#${u.slug}`} className="card" style={{ margin: 0, textDecoration: "none", color: "var(--ink)" }}><strong style={{ color: "var(--brand)" }}>{u.name}</strong><p style={{ margin: ".3rem 0 0" }}>{u.summary}</p></a>))}</div>
       <h2 style={{ marginTop: "2.5rem" }}>How it works</h2>
       <ol className="steps">
         <li><strong>Create your account</strong><p style={{ margin: ".3rem 0 0" }}>Register with your matric number and email. You only need to do this once.</p></li>

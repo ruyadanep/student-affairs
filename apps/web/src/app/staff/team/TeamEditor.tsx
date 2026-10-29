@@ -1,4 +1,5 @@
 "use client";
+import { units } from "@/lib/units";
 import { useState } from "react";
 export type M = { id?: string; full_name: string; title: string | null; unit: string | null; bio: string | null; email: string | null; phone: string | null; sort_order: number; published: boolean; photo_url: string | null; account_email: string | null };
 async function send(body: object) { const r = await fetch("/api/staff/team", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); return { ok: r.ok, j: await r.json() }; }
@@ -23,7 +24,7 @@ export default function TeamEditor({ m, admin, isNew }: { m: M; admin: boolean; 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(14rem,1fr))", gap: "0 1rem" }}>
         <label>Full name<input className="field" name="full_name" defaultValue={m.full_name} disabled={ro} required /></label>
         <label>Title<input className="field" name="title" defaultValue={m.title ?? ""} disabled={ro} placeholder="Dean of Student Affairs" /></label>
-        <label>Unit<input className="field" name="unit" defaultValue={m.unit ?? ""} disabled={ro} placeholder="Hostel office" /></label>
+        <label>Unit<select className="field" name="unit" defaultValue={m.unit ?? ""} disabled={ro}><option value="">Directorate office (no unit)</option>{units.map((u) => <option key={u.slug} value={u.name}>{u.name}</option>)}{m.unit && !units.some((u) => u.name === m.unit) && <option value={m.unit}>{m.unit}</option>}</select></label>
         {admin && <label>Account email (links their sign-in)<input className="field" name="account_email" defaultValue={m.account_email ?? ""} type="email" /></label>}
         <label>Public email (optional)<input className="field" name="email" defaultValue={m.email ?? ""} disabled={ro} type="email" /></label>
         <label>Public phone (optional)<input className="field" name="phone" defaultValue={m.phone ?? ""} disabled={ro} /></label>

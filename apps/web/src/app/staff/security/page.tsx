@@ -16,7 +16,7 @@ export default async function Page() {
   type G = { id: string; status: string; requested_by: string; profiles: { full_name: string; email: string | null } | { full_name: string; email: string | null }[] | null };
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8 text-sm">
-      <Link href="/staff" className="text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Security</h1>
 
       <section className="rounded border p-4"><h2 className="mb-2 font-semibold">Settings</h2>

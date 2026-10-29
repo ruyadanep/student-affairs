@@ -45,7 +45,7 @@ export default function Announce({ hostels, templates }: { hostels: { id: string
       </div>
       <label className="block">Send later (leave empty to send now) <input type="datetime-local" value={when} onChange={(e) => setWhen(e.target.value)} className="ml-2 rounded border px-2 py-1" /></label>
       <div className="flex flex-wrap gap-2">
-        <button disabled={busy} onClick={send} className="rounded bg-[#0b5c36] px-4 py-2 font-semibold text-white disabled:opacity-60">{when ? "Schedule" : "Send now"}</button>
+        <button disabled={busy} onClick={send} className="btn">{when ? "Schedule" : "Send now"}</button>
         <input value={tname} onChange={(e) => setTname(e.target.value)} placeholder="Template name" className="rounded border px-2 py-1" />
         <button disabled={busy || !tname} onClick={async () => { const d = await call("save_template", { p_name: tname, p_title: title, p_body: body }); if (d !== false) setMsg({ ok: true, t: "Template saved." }); }} className="rounded border px-3 py-2">Save as template</button>
       </div>

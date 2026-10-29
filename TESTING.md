@@ -5,7 +5,7 @@ Use a **fresh Supabase project** and test data only. Do not use real student dat
 ## 1. Set up
 
 1. In the Supabase SQL editor, run these in order: `0001_phase1_schema.sql`, `0002_staff_notifications.sql`, `0003_clearance_logic.sql`, `0004_documents_bucket.sql`, `0005_new_user_profile.sql`, `0006_org_leave.sql`, `0007_enrolled_students.sql`, `0008_announcements.sql`, `0009_clearance_certificate.sql`, `0010_contact_messages.sql`. Each should say "Success". Stop and fix the first one that errors.
-2. Run `seed_test_data.sql` (current session, 2 hostels with rooms and beds, 5 clearance units, 3 test students).
+2. Run `seed_test_data.sql` (current session, 2 hostels with rooms and beds, the 6 Student Affairs clearance units, 3 test students).
 3. In **Authentication > Providers > Email**, turn **Confirm email** off for testing. Turn it back on before launch.
 4. Fill `apps/web/.env.local`: Supabase URL, anon (or publishable) key, secret/service role key, `NEXT_PUBLIC_SITE_URL=http://localhost:3000`.
 5. `npm install`, then `npm run dev` from the project root.
@@ -31,7 +31,7 @@ Use two browsers (or one normal, one private window): **staff** in one, **studen
 | C | Gender rule | Register `PLASU/TEST/0002` (female). Apply with Test Hall A first, Test Hall B second, reference `TEST-REF-002`. Confirm and allocate. | Allocated in **Test Hall B**, not A. |
 | D | Maintenance | Student 1 at `/maintenance`: report a plumbing fault. Staff at `/staff/maintenance`: Take this, Mark fixed. | Room shows automatically. Student gets a "fixed" notification and can post a message. |
 | E | Letters | Student 1 at `/letters`: request a letter of good standing. Staff at `/staff/letters`: Approve and issue. Student downloads the PDF, scans the QR code. | PDF has crest, details, QR. `/verify/<code>` says valid with the student's name. |
-| F | Clearance | Student 1 at `/clearance`: Start. Staff at `/staff/clearance`: try to approve **Bursary first**. Then approve in order. Try Return on one with a reason. | Out-of-order approval is blocked. Return needs a reason and the student sees it. After all five approve: Cleared badge, certificate downloads, QR verifies. |
+| F | Clearance | Student 1 at `/clearance`: Start. Staff at `/staff/clearance`: try to approve **Record Unit first**. Then approve in order: Accommodation, Identity Card, Sports, Guidance and Counselling, NYSC, Record. Try Return on one with a reason. | Out-of-order approval is blocked. Return needs a reason and the student sees it. After all six approve: Cleared badge, certificate downloads, QR verifies. |
 | G | Organisations | Student 1: `/organisations/new`, register "Test Chess Club". Staff at `/staff/organisations`: approve. Student 2 joins, then leaves. | Appears in directory after approval. Join and leave update the count. |
 | H | Announcements | Staff at `/staff/announcements`: level 200, click Check recipients, then Send. | Count matches your test students. Both see a notification and the bell count. A level 400 announcement reaches only student 3. |
 | I | Contact | Logged out, send a message at `/contact`. Staff at `/staff/messages`. | Message appears. Mark handled removes it. |

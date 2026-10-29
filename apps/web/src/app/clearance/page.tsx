@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { supabaseServer } from "@/lib/supabase/server";
 import StartButton from "./StartButton";
 import Resubmit from "./Resubmit";
+import { unitByName } from "@/lib/units";
 export const metadata = { title: "Clearance" };
 export default async function Clearance() {
   const db = await supabaseServer();
@@ -16,7 +17,7 @@ export default async function Clearance() {
       <p>{req.status === "cleared" ? <span className="badge">Cleared</span> : <span className="badge gold">{done} of {steps.length} units approved</span>} <small>Session {req.academic_session}</small></p>
       {req.status === "cleared" && <p><a className="btn" href={`/api/clearance/${req.id}/certificate`} target="_blank">Download clearance certificate</a></p>}
       <ol style={{ paddingLeft: "1.2rem" }}>{steps.map((s: any) => (<li key={s.id} style={{ marginBottom: ".7rem" }}>
-        <strong>{s.clearance_units.name}</strong> <span className={s.status === "approved" ? "badge" : "badge gold"}>{s.status}</span>
+        <strong>{s.clearance_units.name}</strong> <span className={s.status === "approved" ? "badge" : "badge gold"}>{s.status}</span>{unitByName(s.clearance_units.name) && <div><small>{unitByName(s.clearance_units.name)!.summary}</small></div>}
         {s.status === "returned" && (<><div className="err">Returned{s.reason ? `: ${s.reason}` : ""}</div><Resubmit step={s.id} /></>)}</li>))}</ol>
     </>)}
   </main>);

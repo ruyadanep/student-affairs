@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const s = Array.isArray(st) ? st[0] : st;
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-4 py-8 text-sm">
-      <Link href="/staff/cases" className="text-[#0b5c36] underline">← Cases</Link>
+      <Link href="/staff/cases">← Cases</Link>
       <h1 className="text-2xl font-bold">{c.case_no} <span className="ml-2 rounded bg-gray-100 px-2 py-0.5 text-xs font-normal">{c.status}</span></h1>
       <p>{s?.full_name} ({s?.matric_no}) · {c.category}</p><p className="rounded border p-3">{c.summary}</p>
       <p>Student notified: {c.notified_at ? t(c.notified_at) : "not yet"}</p>

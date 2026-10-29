@@ -18,7 +18,7 @@ export default async function Page() {
   free = (beds ?? 0) - (taken ?? 0);
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <div><Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <div><Link href="/staff" className="text-sm">← Staff tools</Link>
         <h1 className="mt-2 text-2xl font-bold">Allocation tools</h1>
         <p className="text-sm text-gray-700">Session: {cur?.academic_session ?? "none set"} · {ready} applications ready · {waitlisted} waitlisted · {free} free beds</p></div>
 

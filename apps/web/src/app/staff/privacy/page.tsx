@@ -13,7 +13,7 @@ export default async function Page() {
   const who = (r: R) => { const p = Array.isArray(r.profiles) ? r.profiles[0] : r.profiles; return `${p?.full_name} (${p?.matric_no})`; };
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8 text-sm">
-      <Link href="/staff" className="text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Data protection requests</h1>
       <ul className="space-y-3">{((data ?? []) as unknown as R[]).map((r) => (
         <li key={r.id} className="rounded border p-3"><p><b>{r.kind}</b> · {who(r)} · {r.status}</p><p className="mt-1">{r.details}</p>

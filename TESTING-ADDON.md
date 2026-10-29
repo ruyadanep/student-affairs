@@ -35,3 +35,5 @@ Use a test Supabase project with the seed data. Sign in as the role named in eac
 **AV. Hostel desk** Log a visitor in and out, add a found item and mark it handed over (a student sees it on /lost-found), add inventory and change a quantity.
 
 **AW. Settings** Staff > Security > Settings: changing `overdue_days` to a word is refused; `require_staff_mfa` only accepts true or false.
+
+**AX. Units** Open /units: six units listed with descriptions; each unit anchor works. Home and About show the six units. In Staff > Team, the Unit box is a drop-down of the six; set a member's unit and they appear under that unit on /units and grouped on /team. At /clearance a student sees each unit's short description. Start clearance with the 6 units seeded: six steps in the order Accommodation, Identity Card, Sports, Guidance and Counselling, NYSC, Record.

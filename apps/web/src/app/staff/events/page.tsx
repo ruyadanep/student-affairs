@@ -12,7 +12,7 @@ export default async function Page() {
   const who = (r: R) => (Array.isArray(r.profiles) ? r.profiles[0]?.full_name : r.profiles?.full_name) ?? "A student";
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff" className="text-sm">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Event requests</h1>
       <ul className="space-y-3">
         {(reqs ?? []).length === 0 && <li className="text-sm">Nothing waiting.</li>}

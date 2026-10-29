@@ -10,7 +10,7 @@ Target: `studentaffairs.plasu.edu.ng` on Vercel, with a production Supabase proj
 ## 2. Production Supabase
 1. Create a **new** project (do not reuse the test one). Choose a region close to Nigeria (e.g. Europe/West).
 2. SQL editor: run each file **one at a time, in order, each in its own run**: `0001` … `0020`, then optionally `seed_test_data.sql` ONLY on a test project, never production.
-3. Create the real units in `clearance_units` and the real hostels, rooms and bed spaces (use the staff screens).
+3. Run `0021_directorate_units.sql` (the six Student Affairs units in clearance order), then create the real hostels, rooms and bed spaces (use the staff screens). Give each unit at least one clearance officer under Staff > Setup.
 4. Authentication > Providers > Email: turn **Confirm email ON** in production.
 5. Authentication > URL configuration: Site URL `https://studentaffairs.plasu.edu.ng`; Redirect URLs `https://studentaffairs.plasu.edu.ng/**`.
 6. Authentication > SMTP: add your SMTP (Resend SMTP works) so sign-up and reset emails come from the University domain.

@@ -12,7 +12,7 @@ insert into bed_spaces(room_id, label)
   where r.hostel_id in (select id from hostels where name in ('Test Hall A', 'Test Hall B'))
   on conflict do nothing;
 
-insert into clearance_units(name, sequence) values ('Department', 1), ('Library', 2), ('Bursary', 3), ('Hostel office', 4), ('Student Affairs', 5) on conflict (name) do nothing;
+insert into clearance_units(name, sequence) values ('Accommodation Unit', 1), ('Identity Card Unit', 2), ('Sports Unit', 3), ('Guidance and Counselling Unit', 4), ('NYSC Unit', 5), ('Record Unit', 6) on conflict (name) do update set sequence = excluded.sequence;
 
 insert into enrolled_students(matric_no, full_name, gender, faculty, department, level, is_fresh, is_final_year) values
   ('PLASU/TEST/0001', 'Test Student One', 'male', 'Natural and Applied Sciences', 'Computer Science', 200, true, false),

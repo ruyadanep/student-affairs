@@ -13,7 +13,7 @@ export default async function Page() {
   const { data: bad } = await admin.from("outbound_messages").select("channel,error,created_at").eq("status", "failed").order("created_at", { ascending: false }).limit(10);
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-4 py-8">
-      <Link href="/staff/announce" className="text-sm text-[#0b5c36] underline">← Announcements</Link>
+      <Link href="/staff/announce" className="text-sm">← Announcements</Link>
       <h1 className="text-2xl font-bold">Delivery queue</h1>
       <p className="text-sm"><b>{q}</b> queued · <b>{s}</b> sent · <b>{f}</b> failed. Messages go out automatically every few minutes once the scheduler is set up (see DEPLOY.md).</p>
       <SendNow />

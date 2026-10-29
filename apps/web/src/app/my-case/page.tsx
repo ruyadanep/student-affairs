@@ -34,7 +34,7 @@ export default async function Page() {
           {blocks[i].ap.map((a: { id: string; status: string; decision_note: string | null }) => <p key={a.id}><b>Appeal:</b> {a.status}{a.decision_note ? `: ${a.decision_note}` : ""}</p>)}
           {c.status === "decided" && <div><h3 className="mb-2 font-semibold">Appeal this decision</h3><Appeal id={c.id} /></div>}
         </section>))}
-      <p><Link href="/privacy" className="text-[#0b5c36] underline">How we handle your data</Link></p>
+      <p><Link href="/privacy">How we handle your data</Link></p>
     </main>
   );
 }

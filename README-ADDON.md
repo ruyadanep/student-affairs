@@ -11,7 +11,7 @@ Note: once two super admins exist, `0020` makes the database itself refuse any o
 ## 2. Install and env
 No new npm packages. Add the variables in `.env.addon.example` to `apps/web/.env.local`. Email and SMS stay switched off until the keys are set (messages simply queue/fail with a clear error).
 
-## 3. Small edits to your existing files
+## 3. Small edits to your existing files (ALREADY APPLIED in the merged project; kept here for reference)
 1. `app/layout.tsx`: `import SessionGuard from "@/components/SessionGuard";` and put `<SessionGuard />` just inside `<body>`. This records sign-ins and signs people out after 30 idle minutes (change with `idleMinutes={20}`).
 2. `app/staff/page.tsx`: add a link to `/staff/more`. That page lists every new tool, filtered by the viewer's role.
 3. Nav or footer: add links to `/events`, `/elections`, `/lost-found`, and (signed-in) `/account`, `/my-case`.

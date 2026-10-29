@@ -20,13 +20,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const grouped = results.reduce<Record<string, Res[]>>((a, r) => { (a[r.position_title] ||= []).push(r); return a; }, {});
   return (
     <main className="mx-auto max-w-3xl space-y-6 px-4 py-8">
-      <Link href="/elections" className="text-sm text-[#0b5c36] underline">← Elections</Link>
+      <Link href="/elections" className="text-sm">← Elections</Link>
       <h1 className="text-2xl font-bold">{el.title}</h1>
       {el.status === "published" ? (
         Object.entries(grouped).map(([pos, rows]) => (
           <section key={pos} className="rounded border p-4"><h2 className="font-semibold">{pos}</h2>
             <ul className="mt-2 text-sm">{rows.map((r, i) => <li key={i} className="flex justify-between border-b py-1"><span>{i === 0 && r.votes > 0 ? "🏆 " : ""}{r.candidate_name}</span><span>{r.votes} votes</span></li>)}</ul></section>))
-      ) : !user ? <p className="text-sm">Sign in to vote. <Link href={`/login?next=/elections/${id}`} className="text-[#0b5c36] underline">Sign in</Link></p>
+      ) : !user ? <p className="text-sm">Sign in to vote. <Link href={`/login?next=/elections/${id}`}>Sign in</Link></p>
         : !roll ? <p className="text-sm">You are not on the voter roll for this election.</p>
         : roll.voted_at ? <p className="rounded bg-green-50 p-3 text-sm text-green-900">Your vote has been recorded. Thank you.</p>
         : !live ? <p className="text-sm">Voting is not open right now.</p>

@@ -1,6 +1,6 @@
 import { office } from "@/lib/site";
-const services: [string, string][] = [["Hostel accommodation", "/hostels"], ["Clearance", "/clearance"], ["Student organisations", "/organisations"], ["Letters and attestations", "/letters"], ["Hostel maintenance", "/maintenance"], ["Welfare and support", "/support"]];
-const info: [string, string][] = [["About Student Affairs", "/about"], ["Our team", "/team"], ["News and notices", "/news"], ["Frequently asked questions", "/faq"], ["Verify a document", "/verify"], ["Contact us", "/contact"], ["Privacy notice", "/privacy"]];
+const services: [string, string][] = [["Hostel accommodation", "/hostels"], ["Clearance", "/clearance"], ["Student organisations", "/organisations"], ["Letters and attestations", "/letters"], ["Hostel maintenance", "/maintenance"], ["Welfare and support", "/support"], ["Events", "/events"], ["Elections", "/elections"], ["Lost and found", "/lost-found"]];
+const info: [string, string][] = [["About Student Affairs", "/about"], ["Our units", "/units"], ["Our team", "/team"], ["News and notices", "/news"], ["Frequently asked questions", "/faq"], ["Verify a document", "/verify"], ["Contact us", "/contact"], ["Privacy notice", "/privacy"]];
 export default function Footer() {
   return (
     <footer className="footer">

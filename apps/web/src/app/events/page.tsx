@@ -21,7 +21,7 @@ export default async function Page() {
             <h2 className="font-semibold">{e.title}</h2>
             <p className="text-sm text-gray-700">{new Date(e.starts_at).toLocaleString("en-NG", { dateStyle: "full", timeStyle: "short" })} · {e.venue}{e.capacity ? ` · ${e.capacity} places` : ""}</p>
             {e.description && <p className="mt-1 text-sm">{e.description}</p>}
-            <div className="mt-2">{user ? <Rsvp eventId={e.id} going={mine.includes(e.id)} /> : <a href="/login?next=/events" className="text-sm text-[#0b5c36] underline">Sign in to RSVP</a>}</div>
+            <div className="mt-2">{user ? <Rsvp eventId={e.id} going={mine.includes(e.id)} /> : <a href="/login?next=/events" className="text-sm">Sign in to RSVP</a>}</div>
           </li>))}
       </ul>
       {user && <section><h2 className="mb-2 text-lg font-semibold">Request an event</h2><RequestEvent orgs={orgs} /></section>}

@@ -11,7 +11,7 @@ export default async function Page() {
   const nm = (u: (typeof units)[number]) => (Array.isArray(u.clearance_units) ? u.clearance_units[0]?.name : u.clearance_units?.name) ?? "Unit";
   return (
     <main className="mx-auto max-w-2xl px-4 py-8">
-      <Link href="/staff/clearance" className="text-sm text-[#0b5c36] underline">← Clearance</Link>
+      <Link href="/staff/clearance" className="text-sm">← Clearance</Link>
       <h1 className="mt-2 text-2xl font-bold">Bulk approval</h1>
       <p className="mt-2 text-sm text-gray-700">Approves every student waiting at your unit whose earlier units have already cleared them. Students who were returned or blocked are left alone. Each approval is audit-logged.</p>
       {units.length === 0 && <p className="mt-4 text-sm">You are not assigned to a clearance unit. Ask the Dean's office.</p>}

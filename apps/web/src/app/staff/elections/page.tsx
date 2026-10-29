@@ -17,7 +17,7 @@ export default async function Page() {
   }));
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff" className="text-sm">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Students' Union elections</h1>
       <section className="rounded border p-4"><h2 className="mb-2 font-semibold">New election</h2>
         <RpcForm fn="create_election" button="Create draft" fields={[{ name: "p_title", label: "Title", required: true }, { name: "p_opens", label: "Opens", type: "datetime-local", required: true }, { name: "p_closes", label: "Closes", type: "datetime-local", required: true }]} /></section>

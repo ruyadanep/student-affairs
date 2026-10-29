@@ -15,7 +15,7 @@ export default async function Page() {
   const flag = (d: number) => (d > limit ? <span className="ml-2 rounded bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">overdue</span> : null);
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <div><Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <div><Link href="/staff" className="text-sm">← Staff tools</Link>
         <h1 className="mt-2 text-2xl font-bold">Workload and overdue items</h1>
         <p className="text-sm text-gray-700">Anything waiting more than {limit} days is flagged.</p></div>
       <section><h2 className="font-semibold">Maintenance tickets by assignee</h2>

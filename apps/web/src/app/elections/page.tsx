@@ -13,7 +13,7 @@ export default async function Page() {
       <ul className="mt-4 space-y-3">
         {(data ?? []).length === 0 && <li className="text-sm">No elections right now.</li>}
         {(data ?? []).map((e: { id: string; title: string; status: string; closes_at: string | null }) => (
-          <li key={e.id} className="rounded border p-4"><Link href={`/elections/${e.id}`} className="font-semibold text-[#0b5c36] underline">{e.title}</Link>
+          <li key={e.id} className="rounded border p-4"><Link href={`/elections/${e.id}`} className="font-semibold">{e.title}</Link>
             <p className="text-sm text-gray-700">{e.status === "open" ? `Voting open until ${e.closes_at ? new Date(e.closes_at).toLocaleString("en-NG") : "closing"}` : "Results published"}</p></li>))}
       </ul>
     </main>

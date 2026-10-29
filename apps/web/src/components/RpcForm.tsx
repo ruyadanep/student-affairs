@@ -46,7 +46,7 @@ export default function RpcForm({ fn, fields, button, confirmText, onDone, hidde
             : <input name={f.name} type={f.type ?? "text"} required={f.required} placeholder={f.placeholder} defaultValue={f.defaultValue} className="w-full rounded border px-3 py-2" />}
         </label>
       ))}
-      <button disabled={busy} className="rounded bg-[#0b5c36] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">{busy ? "Working…" : button}</button>
+      <button disabled={busy} className="btn">{busy ? "Working…" : button}</button>
       {msg && <p role="status" className={`text-sm ${msg.ok ? "text-green-800" : "text-red-700"}`}>{msg.text}</p>}
     </form>
   );

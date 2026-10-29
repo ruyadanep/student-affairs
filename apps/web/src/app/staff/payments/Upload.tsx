@@ -35,7 +35,7 @@ export default function Upload() {
           <p className="text-sm">{rows.length} payment rows read.</p>
           <label className="block text-sm">Minimum amount (₦) — rows below this are not verified
             <input value={min} onChange={(e) => setMin(e.target.value)} inputMode="decimal" className="ml-2 w-32 rounded border px-2 py-1" /></label>
-          <button onClick={run} disabled={busy} className="rounded bg-[#0b5c36] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">{busy ? "Checking…" : "Verify matching payments"}</button>
+          <button onClick={run} disabled={busy} className="btn">{busy ? "Checking…" : "Verify matching payments"}</button>
         </>
       )}
       {err && <p className="text-sm text-red-700">{err}</p>}

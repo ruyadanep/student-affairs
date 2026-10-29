@@ -13,14 +13,14 @@ export default async function Page() {
   const pr = (p: C["profiles"]) => (Array.isArray(p) ? p[0] : p);
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff" className="text-sm">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Discipline cases</h1>
       <p className="rounded bg-amber-50 p-3 text-sm text-amber-900">Confidential. Every time you open a case it is recorded in the audit log.</p>
       {dean && <section className="rounded border p-4"><h2 className="mb-2 font-semibold">Open a case</h2>
         <RpcForm fn="open_case" button="Open case" fields={[{ name: "p_matric", label: "Student matric number", required: true }, { name: "p_category", label: "Category (e.g. examination, hostel, conduct)", required: true }, { name: "p_summary", label: "Summary", type: "textarea", required: true }]} /></section>}
       <ul className="divide-y rounded border text-sm">
         {(data ?? []).length === 0 && <li className="p-3">No cases you can see.</li>}
-        {((data ?? []) as unknown as C[]).map((c) => (<li key={c.id} className="p-3"><Link href={`/staff/cases/${c.id}`} className="font-semibold text-[#0b5c36] underline">{c.case_no}</Link> · {pr(c.profiles)?.full_name} ({pr(c.profiles)?.matric_no}) · {c.category} · <span className="rounded bg-gray-100 px-2 py-0.5 text-xs">{c.status}</span></li>))}
+        {((data ?? []) as unknown as C[]).map((c) => (<li key={c.id} className="p-3"><Link href={`/staff/cases/${c.id}`} className="font-semibold">{c.case_no}</Link> · {pr(c.profiles)?.full_name} ({pr(c.profiles)?.matric_no}) · {c.category} · <span className="rounded bg-gray-100 px-2 py-0.5 text-xs">{c.status}</span></li>))}
       </ul>
       {dean && <section><h2 className="mb-2 font-semibold">Clearance holds</h2>
         <ul className="divide-y rounded border text-sm">{(holds ?? []).length === 0 && <li className="p-3">No active holds.</li>}

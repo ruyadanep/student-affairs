@@ -80,3 +80,27 @@ details { border: 1px solid var(--line); border-radius: var(--radius); padding: 
 .steps li::before { content: counter(s); display: inline-grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; margin-bottom: .5rem; }
 
 @media (max-width: 700px) { .hero { padding: 2.75rem 1.25rem; } .hero-mark { opacity: .06; right: -30%; } }
+
+/* Small utility set used by the newer staff and student pages (events, elections, cases, account, desk tools). Uses the same colour variables as everything else. */
+.mx-auto { margin-left: auto; margin-right: auto; } .max-w-2xl { max-width: 42rem; } .max-w-3xl { max-width: 48rem; } .w-full { width: 100%; } .w-fit { width: fit-content; } .w-32 { width: 8rem; }
+.px-1 { padding-inline: .25rem; } .px-2 { padding-inline: .5rem; } .px-3 { padding-inline: .75rem; } .px-4 { padding-inline: 1rem; } .px-5 { padding-inline: 1.25rem; }
+.py-0\.5 { padding-block: .125rem; } .py-1 { padding-block: .25rem; } .py-1\.5 { padding-block: .375rem; } .py-2 { padding-block: .5rem; } .py-8 { padding-block: 2rem; }
+.p-2 { padding: .5rem; } .p-3 { padding: .75rem; } .p-4 { padding: 1rem; } .pl-2 { padding-left: .5rem; } .pl-5 { padding-left: 1.25rem; } .pl-6 { padding-left: 1.5rem; }
+.mb-1 { margin-bottom: .25rem; } .mb-2 { margin-bottom: .5rem; } .mb-3 { margin-bottom: .75rem; } .ml-2 { margin-left: .5rem; } .mr-2 { margin-right: .5rem; }
+.mt-1 { margin-top: .25rem; } .mt-2 { margin-top: .5rem; } .mt-3 { margin-top: .75rem; } .mt-4 { margin-top: 1rem; } .mt-6 { margin-top: 1.5rem; }
+.space-y-1 > * + * { margin-top: .25rem; } .space-y-2 > * + * { margin-top: .5rem; } .space-y-3 > * + * { margin-top: .75rem; } .space-y-4 > * + * { margin-top: 1rem; } .space-y-6 > * + * { margin-top: 1.5rem; } .space-y-8 > * + * { margin-top: 2rem; }
+.flex { display: flex; } .grid { display: grid; } .block { display: block; } .inline-block { display: inline-block; } .flex-wrap { flex-wrap: wrap; } .items-center { align-items: center; } .items-end { align-items: flex-end; } .justify-between { justify-content: space-between; }
+.gap-2 { gap: .5rem; } .gap-3 { gap: .75rem; } .gap-4 { gap: 1rem; }
+@media (min-width: 640px) { .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.border { border: 1px solid var(--line); } .border-b { border-bottom: 1px solid var(--line); } .border-l-2 { border-left: 2px solid var(--line); } .rounded { border-radius: .4rem; }
+.divide-y > * + * { border-top: 1px solid var(--line); } .divide-y.border { padding: 0; list-style: none; } .divide-y > li { padding: .7rem .9rem; }
+.list-disc { list-style: disc; } .underline { text-decoration: underline; }
+.text-xs { font-size: .8rem; } .text-sm { font-size: .95rem; } .text-lg { font-size: 1.15rem; } .text-2xl { font-size: 1.6rem; }
+.font-normal { font-weight: 400; } .font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-gray-600, .text-gray-700 { color: var(--muted); } .text-red-700, .text-red-800 { color: var(--danger); } .text-green-800, .text-green-900 { color: var(--brand); font-weight: 600; }
+.bg-gray-100 { background: var(--line); } .bg-green-50, .hover\:bg-green-50:hover { background: var(--surface); } .bg-red-100 { background: color-mix(in srgb, var(--danger) 15%, var(--paper)); }
+.bg-amber-50 { background: color-mix(in srgb, var(--accent) 22%, var(--paper)); } .text-amber-900 { color: var(--ink); }
+input.rounded, select.rounded, textarea.rounded { font: inherit; font-weight: 400; color: var(--ink); background: var(--paper); border: 1px solid #b9c4bd; }
+textarea.w-full, input.w-full, select.w-full { display: block; }
+.btn-danger { background: var(--danger); color: #fff; }
+form label.block > span.block { margin-bottom: .25rem; }

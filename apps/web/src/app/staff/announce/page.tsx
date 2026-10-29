@@ -14,7 +14,7 @@ export default async function Page() {
   ]);
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8">
-      <div><Link href="/staff" className="text-sm text-[#0b5c36] underline">← Staff tools</Link>
+      <div><Link href="/staff" className="text-sm">← Staff tools</Link>
         <h1 className="mt-2 text-2xl font-bold">Announcements</h1>
         <p className="text-sm text-gray-700">Email and SMS only reach students who opted in and have an address or number on file. SMS needs a registered sender ID.</p></div>
       <Announce hostels={hostels ?? []} templates={templates ?? []} />
@@ -23,7 +23,7 @@ export default async function Page() {
           {(scheduled ?? []).map((s: { id: string; title: string; send_at: string; channels: string[] }) => (
             <li key={s.id} className="flex items-center justify-between gap-3 p-3"><span>{s.title} · {new Date(s.send_at).toLocaleString("en-NG")} · {s.channels.join(", ")}</span>
               <RpcForm fn="cancel_scheduled" hidden={{ p_id: s.id }} fields={[]} button="Cancel" /></li>))}</ul></section>
-      <p className="text-sm"><Link href="/staff/outbox" className="text-[#0b5c36] underline">Delivery queue →</Link></p>
+      <p className="text-sm"><Link href="/staff/outbox">Delivery queue →</Link></p>
     </main>
   );
 }

@@ -17,7 +17,7 @@ export default async function Page() {
   const nm = (x: unknown) => { const h = x as { name: string } | { name: string }[] | null; return (Array.isArray(h) ? h[0] : h)?.name ?? ""; };
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-8 text-sm">
-      <Link href="/staff" className="text-[#0b5c36] underline">← Staff tools</Link>
+      <Link href="/staff">← Staff tools</Link>
       <h1 className="text-2xl font-bold">Hostel desk</h1>
       <section className="space-y-3 rounded border p-4"><h2 className="font-semibold">Visitors now inside ({(inside ?? []).length})</h2>
         <ul className="divide-y">{(inside ?? []).map((v: { id: string; visitor_name: string; resident_matric: string | null; in_at: string; hostels: unknown }) => (

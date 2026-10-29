@@ -15,7 +15,7 @@ export default function Privacy() {
     <form onSubmit={submit} className="space-y-3 text-sm">
       <select name="kind" className="w-full rounded border px-3 py-2"><option value="correction">Correct my information</option><option value="deletion">Delete my personal data</option></select>
       <textarea name="details" required minLength={10} rows={3} placeholder="Tell us what to change or remove" className="w-full rounded border px-3 py-2" />
-      <button className="rounded bg-[#0b5c36] px-4 py-2 font-semibold text-white">Send request</button>
+      <button className="btn">Send request</button>
       {m && <p role="status">{m}</p>}
     </form>
   );

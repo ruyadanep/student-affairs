@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 export default function Login() {
   const [msg, setMsg] = useState("");
+  useEffect(() => { if (new URLSearchParams(location.search).get("reason") === "idle") setMsg("You were signed out after a period of inactivity. Please sign in again."); }, []);
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); setMsg("");
     const f = new FormData(e.currentTarget); const db = supabaseBrowser();
