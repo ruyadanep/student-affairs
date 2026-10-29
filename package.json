@@ -1,0 +1,2 @@
+{ "name": "student-affairs", "private": true, "workspaces": ["apps/*"],
+  "scripts": { "dev": "npm run dev -w web", "build": "npm run build -w web", "cms": "npm run dev -w cms" } }

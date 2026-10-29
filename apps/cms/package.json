@@ -1,0 +1,2 @@
+{ "name": "cms", "version": "0.1.0", "private": true, "scripts": { "dev": "sanity dev", "build": "sanity build" },
+  "dependencies": { "sanity": "^3.60.0", "react": "^18.3.0", "react-dom": "^18.3.0" } }
