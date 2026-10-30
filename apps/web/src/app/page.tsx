@@ -286,6 +286,66 @@ const services = [
     href: "/verify",
     icon: "shield-check" as const,
   },
+
+  {
+  title: "Student Code of Conduct",
+  description: "Rules, responsibilities and expected standards of student conduct.",
+  status: "Read guidelines",
+  href: "/resources/code-of-conduct",
+},
+{
+  title: "Hostel Rules and Regulations",
+  description: "Guidelines for students living in University accommodation.",
+  status: "Read regulations",
+  href: "/resources/hostel-regulations",
+},
+{
+  title: "Student Clearance Guidelines",
+  description: "Understand the student clearance process and requirements.",
+  status: "View guidelines",
+  href: "/resources/clearance-guidelines",
+},
+
+{
+  title: "Student Welfare and Support Guidelines",
+  description: "Counselling, complaints, accessibility and student assistance.",
+  status: "View guidelines",
+  href: "/resources/welfare-guidelines",
+},
+
+
+{
+  title: "Hostel Application and Accommodation Guidelines",
+  description: "Guidance on hostel applications, room allocation and student residence.",
+  status: "View guidelines",
+  href: "/resources/hostel-application-guidelines",
+},
+
+
+{
+  title: "Student Health and Wellness Guidelines",
+  description: "Guidance on medical services, personal hygiene, mental health and student wellbeing.",
+  status: "View guidelines",
+  href: "/resources/health-wellness-guidelines",
+},
+
+
+{
+  title: "Student Financial Obligations and Payment Guidelines",
+  description: "Guidance on University fees, approved payments, receipts and financial assistance.",
+  status: "View guidelines",
+  href: "/resources/financial-guidelines",
+},
+
+
+{
+  title: "SIWES and Industrial Training Guidelines",
+  description: "Guidance on industrial attachment, workplace conduct, logbooks and assessment.",
+  status: "View guidelines",
+  href: "/resources/siwes-guidelines",
+},
+
+
 ];
 
 async function getStatistics() {
@@ -496,7 +556,7 @@ export default async function Home() {
                 >
                   <div className="home-service-top">
                     <span className="home-icon-box">
-                      <Icon name={service.icon} />
+                      <Icon name={service.icon ?? "building"} />
                     </span>
 
                     <span className="home-service-arrow">
