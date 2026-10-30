@@ -21,3 +21,22 @@ export const getNotices = (limit = 20) =>
 export const getNotice = (slug: string) => q<any | null>(`*[_type=="notice" && slug.current==$slug && published==true][0]{title,date,summary,body}`, { slug }, null);
 export const getHero = () => q<any | null>(`*[_type=="heroSlide" && published==true] | order(order asc)[0]{headline,subheadline,ctaLabel,ctaUrl,"imageUrl":image.asset->url}`, {}, null);
 export const getDean = () => q<any | null>(`*[_type=="deanProfile"][0]{name,title,message,"photoUrl":photo.asset->url}`, {}, null);
+
+export async function getEvents(limit = 6) {
+  return q(
+    `*[_type == "event" && date >= now()] | order(date asc)[0...$limit] {
+      _id,
+      title,
+      "slug": slug.current,
+      date,
+      endDate,
+      category,
+      description,
+      "imageUrl": image.asset->url,
+      location,
+      featured
+    }`,
+    { limit },
+    []
+  );
+}

@@ -2194,3 +2194,224 @@ form label.block > span.block { margin-bottom: .25rem; }
     flex-direction: column;
   }
 }
+
+
+/* =========================================
+   UPCOMING EVENTS - PLASU STUDENT AFFAIRS
+========================================= */
+
+.home-events-section {
+  padding: 85px 0;
+  background: linear-gradient(135deg, #f2f8f1 0%, #ffffff 55%, #fffaf0 100%);
+}
+
+.home-events-section .home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-events-section .home-section-heading {
+  margin-bottom: 35px;
+}
+
+.home-events-section .home-section-kicker {
+  display: inline-block;
+  color: #146d0c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.home-events-section .home-section-heading h2 {
+  color: #173d26;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+
+.home-events-section .home-section-heading p {
+  max-width: 650px;
+  color: #66736a;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.home-events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 35px;
+}
+
+.home-event-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e4ece2;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(20, 60, 30, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(20, 60, 30, 0.12);
+}
+
+.home-event-image,
+.home-event-image-placeholder {
+  display: flex;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.home-event-image-placeholder {
+  background: linear-gradient(135deg, #146d0c, #2b7258);
+  color: #ffffff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-event-image-placeholder svg {
+  width: 42px;
+  height: 42px;
+  stroke: #fec218;
+}
+
+.home-event-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.home-event-category {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 30px;
+  background: #edf6e9;
+  color: #146d0c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.home-event-content h3 {
+  color: #173d26;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin: 16px 0 10px;
+}
+
+.home-event-content > p {
+  color: #68746b;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 12px;
+}
+
+.home-event-date,
+.home-event-location {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #146d0c;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.home-event-date svg,
+.home-event-location svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke: #146d0c;
+}
+
+.home-event-location {
+  color: #68746b;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.home-event-location svg {
+  stroke: #68746b;
+}
+
+.home-events-empty {
+  margin-top: 30px;
+  padding: 55px 25px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #cbdaca;
+  border-radius: 18px;
+}
+
+.home-events-empty > svg {
+  width: 42px;
+  height: 42px;
+  color: #146d0c;
+  margin-bottom: 15px;
+}
+
+.home-events-empty h3 {
+  color: #173d26;
+  font-size: 21px;
+  margin: 0 0 10px;
+}
+
+.home-events-empty p {
+  color: #68746b;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+  .home-events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .home-events-section {
+    padding: 55px 0;
+  }
+
+  .home-events-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .home-event-image,
+  .home-event-image-placeholder {
+    height: 200px;
+  }
+
+  .home-event-content {
+    padding: 22px;
+  }
+
+  .home-event-content h3 {
+    font-size: 19px;
+  }
+
+  .home-events-empty {
+    padding: 40px 18px;
+  }
+}

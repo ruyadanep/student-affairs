@@ -1,7 +1,7 @@
 
 import { units } from "@/lib/units";
 import { supabaseServer } from "@/lib/supabase/server";
-import { getHero, getNotices, getDean } from "@/lib/sanity";
+import { getHero, getNotices, getDean, getEvents } from "@/lib/sanity";
 import type { CSSProperties, ReactNode } from "react";
 
 type IconName =
@@ -178,35 +178,6 @@ const services = [
   },
 ];
 
-
-const upcomingEvents = [
-  {
-    category: "STUDENT ORIENTATION",
-    title: "New Student Orientation",
-    description:
-      "Information about orientation programmes and activities for newly admitted students.",
-    date: "DATE TO BE ANNOUNCED",
-    icon: "graduation-cap" as const,
-  },
-  {
-    category: "STUDENT WELFARE",
-    title: "Student Welfare Programme",
-    description:
-      "Updates on student welfare initiatives, engagement programmes and support activities.",
-    date: "DATE TO BE ANNOUNCED",
-    icon: "users" as const,
-  },
-  {
-    category: "IMPORTANT DEADLINES",
-    title: "Student Affairs Deadlines",
-    description:
-      "Watch this space for confirmed application deadlines and important student service dates.",
-    date: "CHECK FOR UPDATES",
-    icon: "calendar" as const,
-  },
-];
-
-
 async function getStatistics() {
   try {
     const supabase = await supabaseServer();
@@ -247,12 +218,29 @@ function formatDate(value?: string) {
   }).format(date);
 }
 
+function formatEventDate(value?: string) {
+  if (!value) return "DATE TO BE ANNOUNCED";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "DATE TO BE ANNOUNCED";
+
+  return new Intl.DateTimeFormat("en-NG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
+}
+
 export default async function Home() {
-  const [hero, news, totals, dean] = await Promise.all([
+  const [hero, news, totals, dean, events] = await Promise.all([
     getHero(),
     getNotices(3),
     getStatistics(),
     getDean(),
+    getEvents(6),
   ]);
 
   const heroHeadline =
@@ -271,6 +259,7 @@ export default async function Home() {
     : {};
 
   const unitItems = Array.isArray(units) ? units : [];
+  const eventItems = Array.isArray(events) ? events : [];
 
   return (
     <div className="homepage">
@@ -544,153 +533,158 @@ export default async function Home() {
           </section>
 
           {/* 7. HOW TO USE THE PORTAL */}
-<section className="home-how-section">
-  <div className="home-container">
-    <div className="home-section-heading">
-      <div>
-        <span className="home-section-kicker">
-          SIMPLE AND CONVENIENT
-        </span>
-        <h2>How to Use the Portal</h2>
-        <p>
-          Follow these simple steps to access Student Affairs
-          services and manage your requests.
-        </p>
-      </div>
-    </div>
+          <section className="home-how-section">
+            <div className="home-section-heading">
+              <div>
+                <span className="home-section-kicker">
+                  SIMPLE AND CONVENIENT
+                </span>
+                <h2>How to Use the Portal</h2>
+                <p>
+                  Follow these simple steps to access Student Affairs
+                  services and manage your requests.
+                </p>
+              </div>
+            </div>
 
-    <div className="home-steps-grid">
+            <div className="home-steps-grid">
 
-      <div className="home-step">
-        <span className="home-step-number">01</span>
-        <div className="home-step-icon">
-          <Icon name="user" />
-        </div>
-        <h3>Access the Portal</h3>
-        <p>
-          Visit the PLASU Student Affairs Portal using your
-          computer, tablet or mobile device.
-        </p>
-      </div>
+              <div className="home-step">
+                <span className="home-step-number">01</span>
+                <div className="home-step-icon">
+                  <Icon name="user" />
+                </div>
+                <h3>Access the Portal</h3>
+                <p>
+                  Visit the PLASU Student Affairs Portal using your
+                  computer, tablet or mobile device.
+                </p>
+              </div>
 
-      <div className="home-step">
-        <span className="home-step-number">02</span>
-        <div className="home-step-icon">
-          <Icon name="shield-check" />
-        </div>
-        <h3>Sign In or Register</h3>
-        <p>
-          Create an account if you are new, or sign in to
-          access your personal student dashboard.
-        </p>
-      </div>
+              <div className="home-step">
+                <span className="home-step-number">02</span>
+                <div className="home-step-icon">
+                  <Icon name="shield-check" />
+                </div>
+                <h3>Sign In or Register</h3>
+                <p>
+                  Create an account if you are new, or sign in to
+                  access your personal student dashboard.
+                </p>
+              </div>
 
-      <div className="home-step">
-        <span className="home-step-number">03</span>
-        <div className="home-step-icon">
-          <Icon name="clipboard" />
-        </div>
-        <h3>Select a Service</h3>
-        <p>
-          Choose the service you need, provide the required
-          information and submit your request.
-        </p>
-      </div>
+              <div className="home-step">
+                <span className="home-step-number">03</span>
+                <div className="home-step-icon">
+                  <Icon name="clipboard" />
+                </div>
+                <h3>Select a Service</h3>
+                <p>
+                  Choose the service you need, provide the required
+                  information and submit your request.
+                </p>
+              </div>
 
-      <div className="home-step">
-        <span className="home-step-number">04</span>
-        <div className="home-step-icon">
-          <Icon name="check-circle" />
-        </div>
-        <h3>Track Your Request</h3>
-        <p>
-          Visit your dashboard to follow the progress of
-          your requests and check for updates.
-        </p>
-      </div>
+              <div className="home-step">
+                <span className="home-step-number">04</span>
+                <div className="home-step-icon">
+                  <Icon name="check-circle" />
+                </div>
+                <h3>Track Your Request</h3>
+                <p>
+                  Visit your dashboard to follow the progress of
+                  your requests and check for updates.
+                </p>
+              </div>
 
-    </div>
+            </div>
 
-    <div className="home-how-footer">
-      <p>Need assistance using the portal?</p>
-      <a href="/support" className="home-text-link">
-        Contact Student Support <Icon name="arrow-right" />
-      </a>
-    </div>
-  </div>
-</section>
+            <div className="home-how-footer">
+              <p>Need assistance using the portal?</p>
+              <a href="/support" className="home-text-link">
+                Contact Student Support <Icon name="arrow-right" />
+              </a>
+            </div>
+          </section>
 
-{/* 8. UPCOMING EVENTS AND IMPORTANT DATES */}
-<section className="home-events-section">
-  <div className="home-container">
+          {/* 8. UPCOMING EVENTS AND IMPORTANT DATES */}
+          <section className="home-events-section">
+            <div className="home-container">
 
-    <div className="home-section-heading">
-      <div>
-        <span className="home-section-kicker">
-          MARK YOUR CALENDAR
-        </span>
-        <h2>Upcoming Events and Important Dates</h2>
-        <p>
-          Stay informed about upcoming student activities,
-          university programmes and important deadlines.
-        </p>
-      </div>
+              <div className="home-section-heading">
+                <div>
+                  <span className="home-section-kicker">
+                    WHAT'S HAPPENING
+                  </span>
+                  <h2>Upcoming Events and Important Dates</h2>
+                  <p>
+                    Stay informed about upcoming university events,
+                    student programmes and important dates.
+                  </p>
+                </div>
+              </div>
 
-      <a href="/news" className="home-text-link">
-        View announcements <Icon name="arrow-right" />
-      </a>
-    </div>
+              {eventItems.length > 0 ? (
+                <div className="home-events-grid">
+                  {eventItems.map((event: any) => (
+                    <article className="home-event-card" key={event._id}>
 
-    <div className="home-events-grid">
-      {upcomingEvents.map((event, index) => (
-        <article
-          className="home-event-card"
-          key={event.title}
-        >
-          <div className="home-event-top">
-            <span className="home-event-icon">
-              <Icon name={event.icon} />
-            </span>
+                      {event.imageUrl ? (
+                        <img
+                          src={event.imageUrl}
+                          alt={event.title}
+                          className="home-event-image"
+                        />
+                      ) : (
+                        <div className="home-event-image-placeholder">
+                          <Icon name="calendar" />
+                          <span>PLASU Student Affairs</span>
+                        </div>
+                      )}
 
-            <span className="home-event-number">
-              0{index + 1}
-            </span>
-          </div>
+                      <div className="home-event-content">
 
-          <span className="home-event-category">
-            {event.category}
-          </span>
+                        <span className="home-event-category">
+                          {String(event.category || "GENERAL")
+                            .replace(/[-_]/g, " ")
+                            .toUpperCase()}
+                        </span>
 
-          <h3>{event.title}</h3>
+                        <h3>{event.title}</h3>
 
-          <p>{event.description}</p>
+                        <p>{event.description}</p>
 
-          <div className="home-event-date">
-            <Icon name="calendar" />
-            <span>{event.date}</span>
-          </div>
+                        <div className="home-event-date">
+                          <Icon name="calendar" />
+                          <span>{formatEventDate(event.date)}</span>
+                        </div>
 
-          <a href="/news" className="home-event-link">
-            Check announcements <Icon name="arrow-right" />
-          </a>
-        </article>
-      ))}
-    </div>
+                        {event.location && (
+                          <p className="home-event-location">
+                            <Icon name="building" />
+                            {event.location}
+                          </p>
+                        )}
 
-    <div className="home-events-note">
-      <span className="home-events-note-icon">
-        <Icon name="bell" />
-      </span>
-      <p>
-        Important dates and event schedules will be updated
-        as official information becomes available.
-      </p>
-    </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="home-events-empty">
+                  <Icon name="calendar" />
+                  <h3>No Upcoming Events</h3>
+                  <p>
+                    There are currently no upcoming events.
+                    Please check back for new announcements.
+                  </p>
+                </div>
+              )}
 
-  </div>
-</section>
+            </div>
+          </section>
 
-          {/* 8. LATEST NEWS */}
+          {/* 9. LATEST NEWS */}
           <section className="home-section">
             <div className="home-section-heading">
               <div>
@@ -783,7 +777,7 @@ export default async function Home() {
             </div>
           </section>
 
-          {/* 9. SUPPORT CTA */}
+          {/* 10. SUPPORT CTA */}
           <section className="home-support">
             <div className="home-support-icon">
               <Icon name="life-buoy" />
