@@ -1,6 +1,7 @@
 import { office } from "@/lib/site";
+import { units } from "@/lib/units";
 const services: [string, string][] = [["Hostel accommodation", "/hostels"], ["Clearance", "/clearance"], ["Student organisations", "/organisations"], ["Letters and attestations", "/letters"], ["Hostel maintenance", "/maintenance"], ["Welfare and support", "/support"], ["Events", "/events"], ["Elections", "/elections"], ["Lost and found", "/lost-found"]];
-const info: [string, string][] = [["About Student Affairs", "/about"], ["Our units", "/units"], ["Our team", "/team"], ["News and notices", "/news"], ["Frequently asked questions", "/faq"], ["Verify a document", "/verify"], ["Contact us", "/contact"], ["Privacy notice", "/privacy"]];
+const info: [string, string][] = [["About us", "/about"], ["Our units", "/units"], ["News and notices", "/news"], ["Frequently asked questions", "/faq"], ["Verify a document", "/verify"], ["Contact us", "/contact"], ["Privacy notice", "/privacy"]];
 export default function Footer() {
   return (
     <footer className="footer">
@@ -14,6 +15,7 @@ export default function Footer() {
           <p style={{ margin: 0, opacity: 0.85 }}>Supporting students with accommodation, clearance, clubs and societies, letters, and welfare.</p>
         </div>
         <nav aria-label="Services"><h2>Services</h2><ul>{services.map(([t, h]) => <li key={h}><a href={h}>{t}</a></li>)}</ul></nav>
+        <nav aria-label="Our units"><h2>Our units</h2><ul>{units.map((u) => <li key={u.slug}><a href={`/units/${u.slug}`}>{u.name}</a></li>)}</ul></nav>
         <nav aria-label="Information"><h2>Information</h2><ul>{info.map(([t, h]) => <li key={h}><a href={h}>{t}</a></li>)}</ul></nav>
         <div><h2>Office</h2>
           <p style={{ margin: "0 0 .4rem" }}>{office.address}</p>
