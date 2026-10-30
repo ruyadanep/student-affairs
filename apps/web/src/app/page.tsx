@@ -178,6 +178,35 @@ const services = [
   },
 ];
 
+
+const upcomingEvents = [
+  {
+    category: "STUDENT ORIENTATION",
+    title: "New Student Orientation",
+    description:
+      "Information about orientation programmes and activities for newly admitted students.",
+    date: "DATE TO BE ANNOUNCED",
+    icon: "graduation-cap" as const,
+  },
+  {
+    category: "STUDENT WELFARE",
+    title: "Student Welfare Programme",
+    description:
+      "Updates on student welfare initiatives, engagement programmes and support activities.",
+    date: "DATE TO BE ANNOUNCED",
+    icon: "users" as const,
+  },
+  {
+    category: "IMPORTANT DEADLINES",
+    title: "Student Affairs Deadlines",
+    description:
+      "Watch this space for confirmed application deadlines and important student service dates.",
+    date: "CHECK FOR UPDATES",
+    icon: "calendar" as const,
+  },
+];
+
+
 async function getStatistics() {
   try {
     const supabase = await supabaseServer();
@@ -514,49 +543,152 @@ export default async function Home() {
             </div>
           </section>
 
-          {/* 7. HOW IT WORKS */}
-          <section className="home-how-section">
-            <div className="home-section-heading">
-              <div>
-                <span className="home-section-kicker">
-                  SIMPLE AND CONVENIENT
-                </span>
-                <h2>How to Use the Portal</h2>
-                <p>
-                  Getting the student services you need is straightforward.
-                </p>
-              </div>
-            </div>
+          {/* 7. HOW TO USE THE PORTAL */}
+<section className="home-how-section">
+  <div className="home-container">
+    <div className="home-section-heading">
+      <div>
+        <span className="home-section-kicker">
+          SIMPLE AND CONVENIENT
+        </span>
+        <h2>How to Use the Portal</h2>
+        <p>
+          Follow these simple steps to access Student Affairs
+          services and manage your requests.
+        </p>
+      </div>
+    </div>
 
-            <div className="home-steps-grid">
-              <div className="home-step">
-                <span className="home-step-number">01</span>
-                <h3>Access the Portal</h3>
-                <p>
-                  Open the Student Affairs Portal and navigate to the service
-                  you need.
-                </p>
-              </div>
+    <div className="home-steps-grid">
 
-              <div className="home-step">
-                <span className="home-step-number">02</span>
-                <h3>Submit Your Request</h3>
-                <p>
-                  Provide the required information and submit your request
-                  through the appropriate service.
-                </p>
-              </div>
+      <div className="home-step">
+        <span className="home-step-number">01</span>
+        <div className="home-step-icon">
+          <Icon name="user" />
+        </div>
+        <h3>Access the Portal</h3>
+        <p>
+          Visit the PLASU Student Affairs Portal using your
+          computer, tablet or mobile device.
+        </p>
+      </div>
 
-              <div className="home-step">
-                <span className="home-step-number">03</span>
-                <h3>Track and Get Support</h3>
-                <p>
-                  Follow up on your request and contact Student Affairs when
-                  you need assistance.
-                </p>
-              </div>
-            </div>
-          </section>
+      <div className="home-step">
+        <span className="home-step-number">02</span>
+        <div className="home-step-icon">
+          <Icon name="shield-check" />
+        </div>
+        <h3>Sign In or Register</h3>
+        <p>
+          Create an account if you are new, or sign in to
+          access your personal student dashboard.
+        </p>
+      </div>
+
+      <div className="home-step">
+        <span className="home-step-number">03</span>
+        <div className="home-step-icon">
+          <Icon name="clipboard" />
+        </div>
+        <h3>Select a Service</h3>
+        <p>
+          Choose the service you need, provide the required
+          information and submit your request.
+        </p>
+      </div>
+
+      <div className="home-step">
+        <span className="home-step-number">04</span>
+        <div className="home-step-icon">
+          <Icon name="check-circle" />
+        </div>
+        <h3>Track Your Request</h3>
+        <p>
+          Visit your dashboard to follow the progress of
+          your requests and check for updates.
+        </p>
+      </div>
+
+    </div>
+
+    <div className="home-how-footer">
+      <p>Need assistance using the portal?</p>
+      <a href="/support" className="home-text-link">
+        Contact Student Support <Icon name="arrow-right" />
+      </a>
+    </div>
+  </div>
+</section>
+
+{/* 8. UPCOMING EVENTS AND IMPORTANT DATES */}
+<section className="home-events-section">
+  <div className="home-container">
+
+    <div className="home-section-heading">
+      <div>
+        <span className="home-section-kicker">
+          MARK YOUR CALENDAR
+        </span>
+        <h2>Upcoming Events and Important Dates</h2>
+        <p>
+          Stay informed about upcoming student activities,
+          university programmes and important deadlines.
+        </p>
+      </div>
+
+      <a href="/news" className="home-text-link">
+        View announcements <Icon name="arrow-right" />
+      </a>
+    </div>
+
+    <div className="home-events-grid">
+      {upcomingEvents.map((event, index) => (
+        <article
+          className="home-event-card"
+          key={event.title}
+        >
+          <div className="home-event-top">
+            <span className="home-event-icon">
+              <Icon name={event.icon} />
+            </span>
+
+            <span className="home-event-number">
+              0{index + 1}
+            </span>
+          </div>
+
+          <span className="home-event-category">
+            {event.category}
+          </span>
+
+          <h3>{event.title}</h3>
+
+          <p>{event.description}</p>
+
+          <div className="home-event-date">
+            <Icon name="calendar" />
+            <span>{event.date}</span>
+          </div>
+
+          <a href="/news" className="home-event-link">
+            Check announcements <Icon name="arrow-right" />
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div className="home-events-note">
+      <span className="home-events-note-icon">
+        <Icon name="bell" />
+      </span>
+      <p>
+        Important dates and event schedules will be updated
+        as official information becomes available.
+      </p>
+    </div>
+
+  </div>
+</section>
 
           {/* 8. LATEST NEWS */}
           <section className="home-section">

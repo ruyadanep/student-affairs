@@ -1903,3 +1903,294 @@ form label.block > span.block { margin-bottom: .25rem; }
   }
 }
 
+/* =========================================
+   HOW TO USE THE PORTAL
+========================================= */
+
+.home-how-section {
+  background: linear-gradient(135deg, #f4f1fb, #f8f9ff) !important;
+  border-radius: 24px;
+  padding: 55px 35px !important;
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.home-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.home-step {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e8e2f4;
+  border-radius: 18px;
+  padding: 28px 23px;
+  min-height: 265px;
+  box-shadow: 0 5px 20px rgba(35, 25, 65, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(35, 25, 65, 0.09);
+}
+
+.home-step-number {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #ded5ef;
+}
+
+.home-step-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee8fa;
+  color: #7050a5;
+  margin-bottom: 25px;
+}
+
+.home-step-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.home-step h3 {
+  font-size: 17px;
+  font-weight: 750;
+  color: #202c25;
+  margin-bottom: 11px;
+}
+
+.home-step p {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #69736d;
+}
+
+.home-how-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #e5def0;
+  padding-top: 22px;
+  margin-top: 30px;
+}
+
+.home-how-footer p {
+  color: #5e655f;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   UPCOMING EVENTS
+========================================= */
+
+.home-events-section {
+  background: linear-gradient(135deg, #f0f7f1, #f8faf8) !important;
+  border-radius: 24px;
+  padding: 55px 35px !important;
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.home-events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 23px;
+  margin-top: 35px;
+}
+
+.home-event-card {
+  background: #ffffff;
+  border: 1px solid #e0ebdf;
+  border-radius: 19px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  min-height: 330px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(20, 70, 35, 0.09);
+}
+
+.home-event-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.home-event-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #e7f3e8;
+  color: #146d0c;
+}
+
+.home-event-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.home-event-number {
+  font-size: 24px;
+  font-weight: 800;
+  color: #e0eadf;
+}
+
+.home-event-category {
+  color: #146d0c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.home-event-card h3 {
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 750;
+  color: #202c25;
+  margin-bottom: 12px;
+}
+
+.home-event-card > p {
+  color: #69736d;
+  font-size: 13.5px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.home-event-date {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #936d19;
+  background: #fff8e8;
+  border: 1px solid #f3e5c2;
+  border-radius: 9px;
+  padding: 11px 12px;
+  font-size: 11px;
+  font-weight: 750;
+  margin-top: auto;
+}
+
+.home-event-date svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.home-event-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #146d0c;
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+  margin-top: 19px;
+}
+
+.home-event-link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.home-event-link:hover svg {
+  transform: translateX(4px);
+}
+
+.home-events-note {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #e0ebdf;
+  border-radius: 13px;
+  padding: 17px 20px;
+  margin-top: 25px;
+}
+
+.home-events-note-icon {
+  color: #146d0c;
+  flex-shrink: 0;
+}
+
+.home-events-note-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.home-events-note p {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #637066;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+  .home-steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .home-how-section,
+  .home-events-section {
+    padding: 30px 18px !important;
+    border-radius: 17px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .home-steps-grid,
+  .home-events-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 25px;
+  }
+
+  .home-step {
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .home-event-card {
+    min-height: auto;
+    padding: 23px 20px;
+  }
+
+  .home-how-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
