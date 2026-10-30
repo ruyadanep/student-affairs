@@ -47,9 +47,7 @@ function Icon({ name }: { name: IconName }) {
       <path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 12l-3-3z" />
     ),
     bell: (
-      <>
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
-      </>
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
     ),
     life: (
       <>
@@ -79,6 +77,29 @@ function Icon({ name }: { name: IconName }) {
       {paths[name]}
     </svg>
   );
+}
+
+/* Clean Markdown formatting from the Dean's message */
+function cleanDeanMessage(message: string, maxLength = 480) {
+  const cleaned = message
+    .replace(/^#{1,6}\s*/gm, "")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\*(.*?)\*/g, "$1")
+    .replace(/^\s*[-*]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+    .replace(/\s+/g, " ")
+    .replace(/^MESSAGE FROM THE DEAN\s*/i, "")
+    .trim();
+
+  if (cleaned.length <= maxLength) {
+    return cleaned;
+  }
+
+  const shortened = cleaned.slice(0, maxLength);
+  const lastSpace = shortened.lastIndexOf(" ");
+
+  return shortened.slice(0, lastSpace > 0 ? lastSpace : maxLength).trim() + "...";
 }
 
 const services: {
@@ -243,13 +264,19 @@ async function counts() {
 }
 
 export default async function Home() {
-  // Fetch all homepage content
+  // Fetch homepage content from Sanity and Supabase
   const [hero, news, totals, dean] = await Promise.all([
     getHero(),
     getNotices(3),
     counts(),
     getDean(),
   ]);
+
+  // Prepare a clean Dean's Message preview
+  const deanPreview =
+    dean?.message && typeof dean.message === "string"
+      ? cleanDeanMessage(dean.message)
+      : "";
 
   // Homepage statistics
   const stats: [string, string][] = [
@@ -478,7 +505,7 @@ export default async function Home() {
                   LEADERSHIP AND VISION
                 </span>
 
-                <h2>Meet Our Dean/Director</h2>
+                <h2>Message from the Dean</h2>
 
                 {dean.name && <h3>{dean.name}</h3>}
 
@@ -488,13 +515,14 @@ export default async function Home() {
                   </span>
                 )}
 
-                {dean.message && <p>{dean.message}</p>}
+                {deanPreview && (
+                  <p className="home-about-message">
+                    {deanPreview}
+                  </p>
+                )}
 
-                <a
-                  href="/about/dean"
-                  className="home-about-link"
-                >
-                  Read More <Icon name="arrow" />
+                <a href="/about/dean" className="home-about-link">
+                  Read the Dean's full message <Icon name="arrow" />
                 </a>
               </div>
             </div>
@@ -544,7 +572,7 @@ export default async function Home() {
         </section>
 
         {/* LATEST NEWS */}
-        {!!news.length && (
+        {news.length > 0 && (
           <section className="home-section">
             <div className="home-section-heading">
               <div>
@@ -567,14 +595,14 @@ export default async function Home() {
                   key={item.slug || item.title}
                 >
                   <a
-                    href={`/news/${item.slug}`}
+                    href={item.slug ? `/news/${item.slug}` : "/news"}
                     className="home-news-image-link"
                     aria-label={`Read ${item.title}`}
                   >
                     {item.imageUrl ? (
                       <img
                         src={item.imageUrl}
-                        alt={item.title}
+                        alt={item.title || "Student Affairs announcement"}
                         className="home-news-image"
                         loading="lazy"
                       />
@@ -599,7 +627,7 @@ export default async function Home() {
                     </div>
 
                     <h3>
-                      <a href={`/news/${item.slug}`}>
+                      <a href={item.slug ? `/news/${item.slug}` : "/news"}>
                         {item.title}
                       </a>
                     </h3>
@@ -608,7 +636,7 @@ export default async function Home() {
 
                     <a
                       className="home-news-link"
-                      href={`/news/${item.slug}`}
+                      href={item.slug ? `/news/${item.slug}` : "/news"}
                     >
                       Read announcement <Icon name="arrow" />
                     </a>
