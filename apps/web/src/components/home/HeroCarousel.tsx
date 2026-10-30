@@ -1,7 +1,7 @@
-
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FocusEvent } from "react";
 
 type HeroSlide = {
   _id: string;
@@ -42,10 +42,32 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const heroSlides = slides.length > 0 ? slides : [fallbackSlide];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [previousSlide, setPreviousSlide] = useState<HeroSlide | null>(null);
+  const [userPaused, setUserPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
-  const activeSlide = heroSlides[activeIndex];
+  const previousSlideRef = useRef<HeroSlide | null>(null);
 
+  const activeSlide = heroSlides[activeIndex] || heroSlides[0];
+
+  const paused = userPaused || isHovered || isFocused || reducedMotion;
+
+  // Detect the user's motion preference.
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const updateMotion = () => setReducedMotion(media.matches);
+
+    updateMotion();
+    media.addEventListener("change", updateMotion);
+
+    return () => media.removeEventListener("change", updateMotion);
+  }, []);
+
+  // Automatically advance slides.
+  // The timer restarts whenever the active slide changes.
   useEffect(() => {
     if (heroSlides.length <= 1 || paused) return;
 
@@ -54,42 +76,89 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     }, 6000);
 
     return () => window.clearInterval(interval);
-  }, [heroSlides.length, paused]);
+  }, [heroSlides.length, paused, activeIndex]);
+
+  // Keep the previous background image briefly for crossfade.
+  useEffect(() => {
+    if (previousSlideRef.current?._id === activeSlide._id) {
+      return;
+    }
+
+    setPreviousSlide(previousSlideRef.current);
+    previousSlideRef.current = activeSlide;
+
+    const timeout = window.setTimeout(() => {
+      setPreviousSlide(null);
+    }, 1000);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeSlide]);
+
+  // Keep the index valid when CMS slides are added or removed.
+  useEffect(() => {
+    setActiveIndex((current) =>
+      Math.min(current, heroSlides.length - 1)
+    );
+  }, [heroSlides.length]);
 
   function goToSlide(index: number) {
     setActiveIndex((index + heroSlides.length) % heroSlides.length);
+  }
+
+  function handleBlur(event: FocusEvent<HTMLElement>) {
+    if (
+      !event.currentTarget.contains(
+        event.relatedTarget as Node | null
+      )
+    ) {
+      setIsFocused(false);
+    }
   }
 
   return (
     <section
       className="home-hero home-hero-carousel"
       aria-label="Student Affairs highlights"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocusCapture={() => setIsFocused(true)}
+      onBlurCapture={handleBlur}
     >
-      <div className="home-hero-background" key={activeSlide._id}>
+      {/* Animated background images */}
+      <div className="home-hero-background" aria-hidden="true">
+        {previousSlide?.imageUrl && (
+          <img
+            key={`previous-${previousSlide._id}`}
+            src={previousSlide.imageUrl}
+            alt=""
+            className="home-hero-background-image is-leaving"
+          />
+        )}
+
         {activeSlide.imageUrl && (
           <img
+            key={activeSlide._id}
             src={activeSlide.imageUrl}
-            alt={activeSlide.imageAlt || ""}
-            className="home-hero-background-image"
+            alt=""
+            fetchPriority="high"
+            className="home-hero-background-image is-entering"
           />
         )}
       </div>
 
+      {/* Green overlay */}
       <div className="home-hero-overlay" />
 
+      {/* Decorative elements */}
       <div className="home-hero-decoration home-hero-decoration-one" />
       <div className="home-hero-decoration home-hero-decoration-two" />
 
+      {/* Hero content */}
       <div className="home-container home-hero-container">
-        <div className="home-hero-content" key={activeSlide._id}>
+        <div
+          className="home-hero-content"
+          key={activeSlide._id}
+        >
           <div className="home-eyebrow hero-animate hero-animate-eyebrow">
             <span className="home-eyebrow-dot" />
             PLATEAU STATE UNIVERSITY
@@ -110,6 +179,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               className="home-btn-primary"
             >
               {activeSlide.ctaLabel || "Access Student Portal"}
+
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M5 12h14m-7-7 7 7-7 7" />
               </svg>
@@ -117,6 +187,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
             <a href="/support" className="home-btn-outline">
               Student Support
+
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M7 17 17 7M7 7h10v10" />
               </svg>
@@ -130,11 +201,13 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
                 <path d="m8 12 3 3 5-6" />
               </svg>
             </span>
+
             Your university services, accessible in one place.
           </div>
         </div>
       </div>
 
+      {/* Carousel navigation */}
       {heroSlides.length > 1 && (
         <div className="home-hero-controls">
           <button
@@ -146,7 +219,10 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             <ArrowIcon direction="left" />
           </button>
 
-          <div className="home-hero-indicators" aria-label="Choose a slide">
+          <div
+            className="home-hero-indicators"
+            aria-label="Choose a slide"
+          >
             {heroSlides.map((slide, index) => (
               <button
                 type="button"
@@ -156,7 +232,9 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
                 }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                aria-current={index === activeIndex ? "true" : undefined}
+                aria-current={
+                  index === activeIndex ? "true" : undefined
+                }
               />
             ))}
           </div>
@@ -172,14 +250,20 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
         </div>
       )}
 
+      {/* Pause / play */}
       {heroSlides.length > 1 && (
         <button
           type="button"
           className="home-hero-pause"
-          onClick={() => setPaused((current) => !current)}
-          aria-label={paused ? "Resume automatic slides" : "Pause automatic slides"}
+          onClick={() => setUserPaused((current) => !current)}
+          aria-label={
+            userPaused
+              ? "Resume automatic slides"
+              : "Pause automatic slides"
+          }
         >
-          {paused ? "Play slideshow" : "Pause slideshow"}
+          <span>{userPaused ? "▶" : "Ⅱ"}</span>
+          {userPaused ? "Play slideshow" : "Pause slideshow"}
         </button>
       )}
     </section>

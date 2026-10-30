@@ -2801,3 +2801,461 @@ form label.block > span.block { margin-bottom: .25rem; }
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+/* ==========================================
+   PLASU STUDENT AFFAIRS HERO CAROUSEL
+   ========================================== */
+
+.home-hero-carousel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  background: #073c20;
+}
+
+/* Background image container */
+
+.home-hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background: #073c20;
+}
+
+.home-hero-background-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: opacity, transform;
+}
+
+.home-hero-background-image.is-entering {
+  animation: plasuHeroImageEnter 1s ease both,
+             plasuHeroImageZoom 8s ease-out both;
+}
+
+.home-hero-background-image.is-leaving {
+  animation: plasuHeroImageLeave 1s ease both;
+}
+
+/* Image transitions */
+
+@keyframes plasuHeroImageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes plasuHeroImageLeave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes plasuHeroImageZoom {
+  from {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Green overlay */
+
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 35, 19, 0.94) 0%,
+      rgba(5, 58, 29, 0.82) 48%,
+      rgba(4, 43, 24, 0.45) 100%
+    );
+}
+
+/* Hero content */
+
+.home-hero-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 125px;
+}
+
+.home-hero-content {
+  max-width: 780px;
+  color: #fff;
+}
+
+.home-hero-content h1 {
+  color: #fff;
+  font-size: clamp(2.7rem, 5.5vw, 5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  margin: 25px 0;
+  max-width: 850px;
+}
+
+.home-hero-description {
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.85;
+}
+
+/* Text animations */
+
+.hero-animate {
+  opacity: 0;
+  animation: plasuHeroTextEnter 0.8s ease forwards;
+}
+
+.hero-animate-eyebrow {
+  animation-delay: 0.1s;
+}
+
+.hero-animate-heading {
+  animation-delay: 0.2s;
+}
+
+.hero-animate-description {
+  animation-delay: 0.35s;
+}
+
+.hero-animate-buttons {
+  animation-delay: 0.5s;
+}
+
+.hero-animate-note {
+  animation-delay: 0.65s;
+}
+
+@keyframes plasuHeroTextEnter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Eyebrow */
+
+.home-hero-carousel .home-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffd34f;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  font-size: 0.78rem;
+}
+
+.home-hero-carousel .home-eyebrow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ffc928;
+  box-shadow: 0 0 15px rgba(255, 201, 40, 0.7);
+}
+
+/* Buttons */
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 35px;
+}
+
+.home-hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 54px;
+  padding: 0 25px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.home-hero-actions a:hover {
+  transform: translateY(-4px);
+}
+
+.home-hero-actions svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-hero-carousel .home-btn-primary {
+  color: #123b20;
+  background: #ffc928;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.home-hero-carousel .home-btn-primary:hover {
+  background: #ffda62;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.home-hero-carousel .home-btn-outline {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.home-hero-carousel .home-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Bottom note */
+
+.home-hero-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 35px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
+
+.home-hero-note span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.home-hero-note svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ffd34f;
+  stroke-width: 2;
+}
+
+/* Carousel navigation */
+
+.home-hero-controls {
+  position: absolute;
+  z-index: 5;
+  bottom: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
+.home-hero-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.home-hero-arrow:hover {
+  color: #153d21;
+  background: #ffc928;
+  border-color: #ffc928;
+  transform: scale(1.08);
+}
+
+.home-hero-arrow svg {
+  width: 21px;
+  height: 21px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-hero-indicators {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.home-hero-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.home-hero-dot.is-active {
+  width: 34px;
+  background: #ffc928;
+}
+
+/* Pause button */
+
+.home-hero-pause {
+  position: absolute;
+  z-index: 5;
+  bottom: 43px;
+  right: max(5%, calc((100% - 1200px) / 2));
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.home-hero-pause:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Focus accessibility */
+
+.home-hero-carousel button:focus-visible,
+.home-hero-carousel a:focus-visible {
+  outline: 3px solid #ffc928;
+  outline-offset: 4px;
+}
+
+/* Decorative circles */
+
+.home-hero-decoration {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.home-hero-decoration-one {
+  width: 420px;
+  height: 420px;
+  right: -130px;
+  top: -170px;
+}
+
+.home-hero-decoration-two {
+  width: 300px;
+  height: 300px;
+  right: 70px;
+  bottom: -220px;
+}
+
+/* Mobile responsive */
+
+@media (max-width: 768px) {
+  .home-hero-carousel {
+    min-height: 590px;
+  }
+
+  .home-hero-container {
+    padding: 80px 22px 130px;
+  }
+
+  .home-hero-content h1 {
+    font-size: clamp(2.3rem, 9vw, 3.4rem);
+    line-height: 1.12;
+  }
+
+  .home-hero-description {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .home-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-hero-actions a {
+    width: 100%;
+    max-width: 310px;
+  }
+
+  .home-hero-controls {
+    bottom: 27px;
+    gap: 13px;
+  }
+
+  .home-hero-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .home-hero-pause {
+    right: 18px;
+    bottom: 83px;
+    font-size: 0.7rem;
+    padding: 8px 12px;
+  }
+
+  .home-hero-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(3, 35, 19, 0.94),
+      rgba(3, 45, 23, 0.78)
+    );
+  }
+}
+
+/* Reduced motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-carousel *,
+  .home-hero-carousel *::before,
+  .home-hero-carousel *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
