@@ -1,8 +1,14 @@
 
 import { units } from "@/lib/units";
 import { supabaseServer } from "@/lib/supabase/server";
-import { getHero, getNotices, getDean, getEvents } from "@/lib/sanity";
-import type { CSSProperties, ReactNode } from "react";
+import {
+  getHeroSlides,
+  getNotices,
+  getDean,
+  getEvents,
+} from "@/lib/sanity";
+import HeroCarousel from "@/components/home/HeroCarousel";
+import type { ReactNode } from "react";
 
 type IconName =
   | "arrow-right"
@@ -26,24 +32,119 @@ type IconName =
 
 function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, ReactNode> = {
-    "arrow-right": <><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></>,
-    "arrow-up-right": <><path d="M7 17 17 7" /><path d="M7 7h10v10" /></>,
-    bed: <><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /><path d="M10 8v4h12" /></>,
-    clipboard: <><rect x="5" y="4" width="14" height="18" rx="2" /><path d="M9 4.5h6a1.5 1.5 0 0 0-3-0 1.5 1.5 0 0 0-3 0Z" /><path d="M9 12h6M9 16h6" /></>,
-    users: <><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="10" cy="7" r="4" /><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></>,
-    file: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6M8 13h8M8 17h8" /></>,
-    wrench: <><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3Z" /></>,
-    bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></>,
-    "life-buoy": <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" /><path d="m5.6 5.6 4.3 4.3m4.2 4.2 4.3 4.3m0-12.8-4.3 4.3m-4.2 4.2-4.3 4.3" /></>,
-    building: <><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 21V9h6v12M7 7h2m6 0h2M7 12h2m6 0h2" /></>,
-    "graduation-cap": <><path d="m2 10 10-5 10 5-10 5Z" /><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6" /></>,
-    "shield-check": <><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" /><path d="m9 12 2 2 4-4" /></>,
-    calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></>,
-    "book-open": <><path d="M12 7v14" /><path d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13h-5a4 4 0 0 0-4 3 4 4 0 0 0-4-3Z" /></>,
-    user: <><circle cx="12" cy="8" r="4" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></>,
-    "check-circle": <><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></>,
-    mail: <><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" /></>,
-    chart: <><path d="M3 3v18h18" /><path d="m8 14 4-4 4 3 5-7" /></>,
+    "arrow-right": (
+      <>
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </>
+    ),
+    "arrow-up-right": (
+      <>
+        <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+      </>
+    ),
+    bed: (
+      <>
+        <path d="M2 4v16" />
+        <path d="M2 8h18a2 2 0 0 1 2 2v10" />
+        <path d="M2 17h20" />
+        <path d="M6 8v9" />
+        <path d="M10 8v4h12" />
+      </>
+    ),
+    clipboard: (
+      <>
+        <rect x="5" y="4" width="14" height="18" rx="2" />
+        <path d="M9 4.5h6a1.5 1.5 0 0 0-3-0 1.5 1.5 0 0 0-3 0Z" />
+        <path d="M9 12h6M9 16h6" />
+      </>
+    ),
+    users: (
+      <>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="10" cy="7" r="4" />
+        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+      </>
+    ),
+    file: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6M8 13h8M8 17h8" />
+      </>
+    ),
+    wrench: (
+      <>
+        <path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3Z" />
+      </>
+    ),
+    bell: (
+      <>
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+        <path d="M10 21h4" />
+      </>
+    ),
+    "life-buoy": (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="3" />
+        <path d="m5.6 5.6 4.3 4.3m4.2 4.2 4.3 4.3m0-12.8-4.3 4.3m-4.2 4.2-4.3 4.3" />
+      </>
+    ),
+    building: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M9 21V9h6v12M7 7h2m6 0h2M7 12h2m6 0h2" />
+      </>
+    ),
+    "graduation-cap": (
+      <>
+        <path d="m2 10 10-5 10 5-10 5Z" />
+        <path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6" />
+      </>
+    ),
+    "shield-check": (
+      <>
+        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+        <path d="m9 12 2 2 4-4" />
+      </>
+    ),
+    calendar: (
+      <>
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M16 3v4M8 3v4M3 10h18" />
+      </>
+    ),
+    "book-open": (
+      <>
+        <path d="M12 7v14" />
+        <path d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13h-5a4 4 0 0 0-4 3 4 4 0 0 0-4-3Z" />
+      </>
+    ),
+    user: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+      </>
+    ),
+    "check-circle": (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="m8 12 3 3 5-6" />
+      </>
+    ),
+    mail: (
+      <>
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-10 6L2 7" />
+      </>
+    ),
+    chart: (
+      <>
+        <path d="M3 3v18h18" />
+        <path d="m8 14 4-4 4 3 5-7" />
+      </>
+    ),
   };
 
   return (
@@ -116,63 +217,72 @@ const services = [
   {
     label: "ACCOMMODATION",
     title: "Hostel Management",
-    description: "View available hostels, explore bed spaces and access accommodation services through the Student Affairs Portal.",
+    description:
+      "View available hostels, explore bed spaces and access accommodation services through the Student Affairs Portal.",
     href: "/hostels",
     icon: "bed" as const,
   },
   {
     label: "STUDENT SERVICES",
     title: "Student Clearance",
-    description: "Follow your clearance process and access the information required to complete student administrative procedures.",
+    description:
+      "Follow your clearance process and access the information required to complete student administrative procedures.",
     href: "/clearance",
     icon: "clipboard" as const,
   },
   {
     label: "CAMPUS COMMUNITY",
     title: "Student Organisations",
-    description: "Explore recognised student organisations, associations and groups within Plateau State University.",
+    description:
+      "Explore recognised student organisations, associations and groups within Plateau State University.",
     href: "/organisations",
     icon: "users" as const,
   },
   {
     label: "DOCUMENT SERVICES",
     title: "Letters and Requests",
-    description: "Submit requests for official student letters and keep track of your administrative requests.",
+    description:
+      "Submit requests for official student letters and keep track of your administrative requests.",
     href: "/letters",
     icon: "file" as const,
   },
   {
     label: "CAMPUS FACILITIES",
     title: "Maintenance Requests",
-    description: "Report hostel, facility and campus maintenance issues to the appropriate university unit.",
+    description:
+      "Report hostel, facility and campus maintenance issues to the appropriate university unit.",
     href: "/maintenance",
     icon: "wrench" as const,
   },
   {
     label: "INFORMATION",
     title: "Notices and Notifications",
-    description: "Stay informed about Student Affairs announcements, important dates and university updates.",
+    description:
+      "Stay informed about Student Affairs announcements, important dates and university updates.",
     href: "/notifications",
     icon: "bell" as const,
   },
   {
     label: "STUDENT WELFARE",
     title: "Student Support",
-    description: "Find assistance and guidance on student welfare matters and other Student Affairs services.",
+    description:
+      "Find assistance and guidance on student welfare matters and other Student Affairs services.",
     href: "/support",
     icon: "life-buoy" as const,
   },
   {
     label: "UNIVERSITY DIRECTORY",
     title: "Student Affairs Units",
-    description: "Find the offices and units responsible for student services and administrative support.",
+    description:
+      "Find the offices and units responsible for student services and administrative support.",
     href: "/units",
     icon: "building" as const,
   },
   {
     label: "DOCUMENT AUTHENTICATION",
     title: "Document Verification",
-    description: "Use the portal to verify official documents issued through supported university services.",
+    description:
+      "Use the portal to verify official documents issued through supported university services.",
     href: "/verify",
     icon: "shield-check" as const,
   },
@@ -235,28 +345,13 @@ function formatEventDate(value?: string) {
 }
 
 export default async function Home() {
-  const [hero, news, totals, dean, events] = await Promise.all([
-    getHero(),
+  const [heroSlides, news, totals, dean, events] = await Promise.all([
+    getHeroSlides(),
     getNotices(3),
     getStatistics(),
     getDean(),
     getEvents(6),
   ]);
-
-  const heroHeadline =
-    hero?.headline || "Supporting Every Student, Every Step of the Way";
-
-  const heroDescription =
-    hero?.subheadline ||
-    "Welcome to the Plateau State University Student Affairs Portal. Access student services, accommodation, clearance, welfare support and important university information in one place.";
-
-  const heroStyle: CSSProperties = hero?.imageUrl
-    ? {
-        backgroundImage: `linear-gradient(90deg, rgba(4,43,25,.94) 0%, rgba(4,43,25,.78) 55%, rgba(4,43,25,.52) 100%), url("${hero.imageUrl}")`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }
-    : {};
 
   const unitItems = Array.isArray(units) ? units : [];
   const eventItems = Array.isArray(events) ? events : [];
@@ -264,41 +359,8 @@ export default async function Home() {
   return (
     <div className="homepage">
 
-      {/* 1. HERO */}
-      <section className="home-hero" style={heroStyle}>
-        <div className="home-hero-overlay" />
-        <div className="home-container">
-          <div className="home-hero-content">
-            <div className="home-eyebrow">
-              <span className="home-eyebrow-dot" />
-              PLATEAU STATE UNIVERSITY
-            </div>
-
-            <h1>{heroHeadline}</h1>
-            <p className="home-hero-description">{heroDescription}</p>
-
-            <div className="home-hero-actions">
-              <a
-                href={hero?.ctaUrl || "/dashboard"}
-                className="home-btn-primary"
-              >
-                {hero?.ctaLabel || "Access Student Portal"}
-                <Icon name="arrow-right" />
-              </a>
-
-              <a href="/support" className="home-btn-outline">
-                Student Support
-                <Icon name="arrow-up-right" />
-              </a>
-            </div>
-
-            <div className="home-hero-note">
-              <span><Icon name="check-circle" /></span>
-              Your university services, accessible in one place.
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 1. ANIMATED HERO CAROUSEL */}
+      <HeroCarousel slides={heroSlides} />
 
       {/* 2. STATISTICS */}
       <section className="home-stats">
@@ -332,7 +394,6 @@ export default async function Home() {
         <section className="home-about-section">
           <div className="home-container">
             <div className="home-about-grid">
-
               <div className="home-about-image">
                 {dean.photoUrl ? (
                   <img
@@ -355,21 +416,16 @@ export default async function Home() {
                 <h2>Dean’s Message</h2>
                 <h3>{dean.name}</h3>
 
-                <p className="home-about-title">
-                  {dean.title}
-                </p>
+                <p className="home-about-title">{dean.title}</p>
 
                 <div className="home-about-divider" />
 
-                <div className="home-about-message">
-                  {dean.message}
-                </div>
+                <div className="home-about-message">{dean.message}</div>
 
                 <a href="/about/dean" className="home-about-link">
                   Read the Dean’s Full Message →
                 </a>
               </div>
-
             </div>
           </div>
         </section>
@@ -479,17 +535,22 @@ export default async function Home() {
                   const name =
                     typeof unit === "string"
                       ? unit
-                      : unit.name || unit.title || unit.label || "Student Affairs Unit";
+                      : unit.name ||
+                        unit.title ||
+                        unit.label ||
+                        "Student Affairs Unit";
 
                   const description =
                     typeof unit === "object"
-                      ? unit.description || unit.summary ||
+                      ? unit.description ||
+                        unit.summary ||
                         "Student Affairs administrative and support services."
                       : "Student Affairs administrative and support services.";
 
                   const href =
                     typeof unit === "object"
-                      ? unit.href || unit.url ||
+                      ? unit.href ||
+                        unit.url ||
                         (unit.slug ? `/units/${unit.slug}` : "/units")
                       : "/units";
 
@@ -548,7 +609,6 @@ export default async function Home() {
             </div>
 
             <div className="home-steps-grid">
-
               <div className="home-step">
                 <span className="home-step-number">01</span>
                 <div className="home-step-icon">
@@ -556,8 +616,8 @@ export default async function Home() {
                 </div>
                 <h3>Access the Portal</h3>
                 <p>
-                  Visit the PLASU Student Affairs Portal using your
-                  computer, tablet or mobile device.
+                  Visit the PLASU Student Affairs Portal using your computer,
+                  tablet or mobile device.
                 </p>
               </div>
 
@@ -568,8 +628,8 @@ export default async function Home() {
                 </div>
                 <h3>Sign In or Register</h3>
                 <p>
-                  Create an account if you are new, or sign in to
-                  access your personal student dashboard.
+                  Create an account if you are new, or sign in to access your
+                  personal student dashboard.
                 </p>
               </div>
 
@@ -580,8 +640,8 @@ export default async function Home() {
                 </div>
                 <h3>Select a Service</h3>
                 <p>
-                  Choose the service you need, provide the required
-                  information and submit your request.
+                  Choose the service you need, provide the required information
+                  and submit your request.
                 </p>
               </div>
 
@@ -592,11 +652,10 @@ export default async function Home() {
                 </div>
                 <h3>Track Your Request</h3>
                 <p>
-                  Visit your dashboard to follow the progress of
-                  your requests and check for updates.
+                  Visit your dashboard to follow the progress of your requests
+                  and check for updates.
                 </p>
               </div>
-
             </div>
 
             <div className="home-how-footer">
@@ -610,7 +669,6 @@ export default async function Home() {
           {/* 8. UPCOMING EVENTS AND IMPORTANT DATES */}
           <section className="home-events-section">
             <div className="home-container">
-
               <div className="home-section-heading">
                 <div>
                   <span className="home-section-kicker">
@@ -618,8 +676,8 @@ export default async function Home() {
                   </span>
                   <h2>Upcoming Events and Important Dates</h2>
                   <p>
-                    Stay informed about upcoming university events,
-                    student programmes and important dates.
+                    Stay informed about upcoming university events, student
+                    programmes and important dates.
                   </p>
                 </div>
               </div>
@@ -628,7 +686,6 @@ export default async function Home() {
                 <div className="home-events-grid">
                   {eventItems.map((event: any) => (
                     <article className="home-event-card" key={event._id}>
-
                       {event.imageUrl ? (
                         <img
                           src={event.imageUrl}
@@ -643,7 +700,6 @@ export default async function Home() {
                       )}
 
                       <div className="home-event-content">
-
                         <span className="home-event-category">
                           {String(event.category || "GENERAL")
                             .replace(/[-_]/g, " ")
@@ -651,7 +707,6 @@ export default async function Home() {
                         </span>
 
                         <h3>{event.title}</h3>
-
                         <p>{event.description}</p>
 
                         <div className="home-event-date">
@@ -665,7 +720,6 @@ export default async function Home() {
                             {event.location}
                           </p>
                         )}
-
                       </div>
                     </article>
                   ))}
@@ -675,12 +729,11 @@ export default async function Home() {
                   <Icon name="calendar" />
                   <h3>No Upcoming Events</h3>
                   <p>
-                    There are currently no upcoming events.
-                    Please check back for new announcements.
+                    There are currently no upcoming events. Please check back
+                    for new announcements.
                   </p>
                 </div>
               )}
-
             </div>
           </section>
 
@@ -784,7 +837,9 @@ export default async function Home() {
             </div>
 
             <div className="home-support-content">
-              <span className="home-section-kicker">WE ARE HERE TO HELP</span>
+              <span className="home-section-kicker">
+                WE ARE HERE TO HELP
+              </span>
               <h2>Need Assistance?</h2>
               <p>
                 Have a question or need help with a Student Affairs service?
