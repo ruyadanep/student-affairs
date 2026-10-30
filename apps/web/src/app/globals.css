@@ -1129,3 +1129,115 @@ form label.block > span.block { margin-bottom: .25rem; }
   outline: 3px solid var(--home-gold);
   outline-offset: 4px;
 }
+
+
+
+/* =========================================
+   HOMEPAGE FULL-WIDTH LAYOUT
+========================================= */
+
+.homepage {
+  width: 100%;
+  max-width: none;
+  overflow-x: clip;
+}
+
+/* Allow homepage sections to use the full screen */
+.homepage .home-container {
+  width: 100%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(18px, 4vw, 64px);
+  padding-right: clamp(18px, 4vw, 64px);
+  box-sizing: border-box;
+}
+
+/* Override the global main width restriction */
+.homepage .home-main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+  padding-top: clamp(48px, 6vw, 88px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+
+/* Full-width hero */
+.homepage .home-hero {
+  width: 100%;
+}
+
+/* Quick access layout */
+.homepage .home-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+/* Consistent shortcut cards */
+.homepage .home-quick-card {
+  min-width: 0;
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.homepage .home-quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(6, 61, 36, .10);
+}
+
+.homepage .home-quick-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.homepage .home-quick-text strong {
+  display: block;
+  line-height: 1.4;
+}
+
+.homepage .home-quick-text small {
+  display: block;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* Full-width content grids */
+.homepage .home-services-grid,
+.homepage .home-units-grid,
+.homepage .home-news-grid {
+  width: 100%;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .homepage .home-quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 580px) {
+  .homepage .home-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .homepage .home-quick-card {
+    min-height: 88px;
+    padding: 16px;
+  }
+
+  .homepage .home-main {
+    padding-top: 42px;
+    padding-bottom: 48px;
+  }
+}

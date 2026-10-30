@@ -119,19 +119,63 @@ const services: {
 ];
 
 
+
 const quick: {
   title: string;
   description: string;
   href: string;
   icon: IconName;
 }[] = [
-  { title: "Apply for a hostel", description: "Accommodation applications", href: "/hostels", icon: "bed" },
-  { title: "Start clearance", description: "Track your clearance", href: "/clearance", icon: "clipboard" },
-  { title: "Request a letter", description: "Official student documents", href: "/letters", icon: "file" },
-  { title: "Report a fault", description: "Hostel maintenance", href: "/maintenance", icon: "wrench" },
-  { title: "Get support", description: "Counselling and welfare", href: "/support", icon: "life" },
-  { title: "Verify a document", description: "Check document authenticity", href: "/verify", icon: "scan" },
+  {
+    title: "Apply for accommodation",
+    description: "Apply and check your hostel allocation",
+    href: "/hostels",
+    icon: "bed",
+  },
+  {
+    title: "Student clearance",
+    description: "Track your clearance progress",
+    href: "/clearance",
+    icon: "clipboard",
+  },
+  {
+    title: "Request a letter",
+    description: "Request official student documents",
+    href: "/letters",
+    icon: "file",
+  },
+  {
+    title: "Report a hostel fault",
+    description: "Report a maintenance problem",
+    href: "/maintenance",
+    icon: "wrench",
+  },
+  {
+    title: "Join an organisation",
+    description: "Explore clubs and student societies",
+    href: "/organisations",
+    icon: "users",
+  },
+  {
+    title: "Campus events",
+    description: "Discover university activities",
+    href: "/events",
+    icon: "bell",
+  },
+  {
+    title: "Get student support",
+    description: "Access counselling and welfare services",
+    href: "/support",
+    icon: "life",
+  },
+  {
+    title: "Verify a document",
+    description: "Check the authenticity of a document",
+    href: "/verify",
+    icon: "scan",
+  },
 ];
+
 
 async function counts() {
   try {
