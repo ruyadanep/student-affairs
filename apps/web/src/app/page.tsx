@@ -1,75 +1,57 @@
 
 import { units } from "@/lib/units";
 import { supabaseServer } from "@/lib/supabase/server";
-import type { ReactNode } from "react";
 import { getHero, getNotices, getDean } from "@/lib/sanity";
+import type { CSSProperties, ReactNode } from "react";
 
 type IconName =
+  | "arrow-right"
+  | "arrow-up-right"
   | "bed"
   | "clipboard"
   | "users"
   | "file"
   | "wrench"
   | "bell"
-  | "life"
-  | "scan"
-  | "arrow";
+  | "life-buoy"
+  | "building"
+  | "graduation-cap"
+  | "shield-check"
+  | "calendar"
+  | "book-open"
+  | "user"
+  | "check-circle"
+  | "mail"
+  | "chart";
 
 function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, ReactNode> = {
-    bed: (
-      <>
-        <path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7" />
-        <path d="M3 14h18M5 9V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3" />
-        <path d="M3 18v2M21 18v2" />
-      </>
-    ),
-    clipboard: (
-      <>
-        <rect x="5" y="4" width="14" height="17" rx="2" />
-        <path d="M9 4.5V3h6v1.5M9 11h6M9 15h6" />
-      </>
-    ),
-    users: (
-      <>
-        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="10" cy="7" r="4" />
-        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-      </>
-    ),
-    file: (
-      <>
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <path d="M14 2v6h6M8 13h8M8 17h8" />
-      </>
-    ),
-    wrench: (
-      <path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 12l-3-3z" />
-    ),
-    bell: (
-      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
-    ),
-    life: (
-      <>
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="4" />
-        <path d="m4.93 4.93 4.24 4.24m5.66 5.66 4.24 4.24m0-14.14-4.24 4.24m-5.66 5.66-4.24 4.24" />
-      </>
-    ),
-    scan: (
-      <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16" />
-    ),
-    arrow: <path d="M5 12h14M12 5l7 7-7 7" />,
+    "arrow-right": <><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></>,
+    "arrow-up-right": <><path d="M7 17 17 7" /><path d="M7 7h10v10" /></>,
+    bed: <><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /><path d="M10 8v4h12" /></>,
+    clipboard: <><rect x="5" y="4" width="14" height="18" rx="2" /><path d="M9 4.5h6a1.5 1.5 0 0 0-3-0 1.5 1.5 0 0 0-3 0Z" /><path d="M9 12h6M9 16h6" /></>,
+    users: <><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="10" cy="7" r="4" /><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></>,
+    file: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6M8 13h8M8 17h8" /></>,
+    wrench: <><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L14 13l-3-3Z" /></>,
+    bell: <><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></>,
+    "life-buoy": <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3" /><path d="m5.6 5.6 4.3 4.3m4.2 4.2 4.3 4.3m0-12.8-4.3 4.3m-4.2 4.2-4.3 4.3" /></>,
+    building: <><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 21V9h6v12M7 7h2m6 0h2M7 12h2m6 0h2" /></>,
+    "graduation-cap": <><path d="m2 10 10-5 10 5-10 5Z" /><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6" /></>,
+    "shield-check": <><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" /><path d="m9 12 2 2 4-4" /></>,
+    calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></>,
+    "book-open": <><path d="M12 7v14" /><path d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13h-5a4 4 0 0 0-4 3 4 4 0 0 0-4-3Z" /></>,
+    user: <><circle cx="12" cy="8" r="4" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></>,
+    "check-circle": <><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></>,
+    mail: <><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" /></>,
+    chart: <><path d="M3 3v18h18" /><path d="m8 14 4-4 4 3 5-7" /></>,
   };
 
   return (
     <svg
       viewBox="0 0 24 24"
-      width="25"
-      height="25"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.7"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -79,286 +61,319 @@ function Icon({ name }: { name: IconName }) {
   );
 }
 
-/* Clean Markdown formatting from the Dean's message */
-function cleanDeanMessage(message: string, maxLength = 480) {
-  const cleaned = message
-    .replace(/^#{1,6}\s*/gm, "")
-    .replace(/\*\*(.*?)\*\*/g, "$1")
-    .replace(/\*(.*?)\*/g, "$1")
-    .replace(/^\s*[-*]\s+/gm, "")
-    .replace(/^\s*\d+\.\s+/gm, "")
-    .replace(/\[(.*?)\]\(.*?\)/g, "$1")
-    .replace(/\s+/g, " ")
-    .replace(/^MESSAGE FROM THE DEAN\s*/i, "")
-    .trim();
-
-  if (cleaned.length <= maxLength) {
-    return cleaned;
-  }
-
-  const shortened = cleaned.slice(0, maxLength);
-  const lastSpace = shortened.lastIndexOf(" ");
-
-  return shortened.slice(0, lastSpace > 0 ? lastSpace : maxLength).trim() + "...";
-}
-
-const services: {
-  title: string;
-  description: string;
-  href: string;
-  icon: IconName;
-  label: string;
-}[] = [
+const quick = [
   {
-    title: "Hostel accommodation",
-    description:
-      "Apply for accommodation, check payment status and view your allocation.",
+    title: "Hostel Accommodation",
+    description: "Explore available student accommodation.",
     href: "/hostels",
-    icon: "bed",
-    label: "Accommodation",
+    icon: "bed" as const,
   },
   {
-    title: "Student clearance",
-    description:
-      "Track the units responsible for your clearance and monitor progress.",
+    title: "Student Clearance",
+    description: "Access your clearance process.",
     href: "/clearance",
-    icon: "clipboard",
-    label: "Student records",
+    icon: "clipboard" as const,
   },
   {
-    title: "Student organisations",
-    description:
-      "Discover student clubs and societies or register an organisation.",
+    title: "Student Organisations",
+    description: "Discover recognised student groups.",
     href: "/organisations",
-    icon: "users",
-    label: "Campus community",
+    icon: "users" as const,
   },
   {
-    title: "Letters and attestations",
-    description:
-      "Request official letters and verify documents using their QR codes.",
+    title: "Official Letters",
+    description: "Request and manage official letters.",
     href: "/letters",
-    icon: "file",
-    label: "Official documents",
+    icon: "file" as const,
   },
   {
-    title: "Hostel maintenance",
-    description:
-      "Report accommodation faults and follow the progress of repairs.",
+    title: "Report an Issue",
+    description: "Submit maintenance and facility reports.",
     href: "/maintenance",
-    icon: "wrench",
-    label: "Hostel support",
+    icon: "wrench" as const,
   },
   {
     title: "Notifications",
-    description:
-      "Stay informed about notices for your hall, level and faculty.",
+    description: "Read important student announcements.",
     href: "/notifications",
-    icon: "bell",
-    label: "Stay informed",
+    icon: "bell" as const,
   },
   {
-    title: "Campus events",
-    description:
-      "Discover upcoming university events and register your interest.",
-    href: "/events",
-    icon: "bell",
-    label: "Campus activities",
-  },
-  {
-    title: "Students' Union elections",
-    description:
-      "Participate in student elections, vote and view election results.",
-    href: "/elections",
-    icon: "users",
-    label: "Student leadership",
-  },
-  {
-    title: "Lost and found",
-    description:
-      "Report missing belongings and find items recovered on campus.",
-    href: "/lost-found",
-    icon: "scan",
-    label: "Campus assistance",
-  },
-];
-
-const quick: {
-  title: string;
-  description: string;
-  href: string;
-  icon: IconName;
-}[] = [
-  {
-    title: "Apply for accommodation",
-    description: "Apply and check your hostel allocation",
-    href: "/hostels",
-    icon: "bed",
-  },
-  {
-    title: "Student clearance",
-    description: "Track your clearance progress",
-    href: "/clearance",
-    icon: "clipboard",
-  },
-  {
-    title: "Request a letter",
-    description: "Request official student documents",
-    href: "/letters",
-    icon: "file",
-  },
-  {
-    title: "Report a hostel fault",
-    description: "Report a maintenance problem",
-    href: "/maintenance",
-    icon: "wrench",
-  },
-  {
-    title: "Join an organisation",
-    description: "Explore clubs and student societies",
-    href: "/organisations",
-    icon: "users",
-  },
-  {
-    title: "Campus events",
-    description: "Discover university activities",
-    href: "/events",
-    icon: "bell",
-  },
-  {
-    title: "Get student support",
-    description: "Access counselling and welfare services",
+    title: "Student Support",
+    description: "Get assistance from Student Affairs.",
     href: "/support",
-    icon: "life",
+    icon: "life-buoy" as const,
   },
   {
-    title: "Verify a document",
-    description: "Check the authenticity of a document",
+    title: "Verify a Document",
+    description: "Verify documents issued by the portal.",
     href: "/verify",
-    icon: "scan",
+    icon: "shield-check" as const,
   },
 ];
 
-async function counts() {
+const services = [
+  {
+    label: "ACCOMMODATION",
+    title: "Hostel Management",
+    description: "View available hostels, explore bed spaces and access accommodation services through the Student Affairs Portal.",
+    href: "/hostels",
+    icon: "bed" as const,
+  },
+  {
+    label: "STUDENT SERVICES",
+    title: "Student Clearance",
+    description: "Follow your clearance process and access the information required to complete student administrative procedures.",
+    href: "/clearance",
+    icon: "clipboard" as const,
+  },
+  {
+    label: "CAMPUS COMMUNITY",
+    title: "Student Organisations",
+    description: "Explore recognised student organisations, associations and groups within Plateau State University.",
+    href: "/organisations",
+    icon: "users" as const,
+  },
+  {
+    label: "DOCUMENT SERVICES",
+    title: "Letters and Requests",
+    description: "Submit requests for official student letters and keep track of your administrative requests.",
+    href: "/letters",
+    icon: "file" as const,
+  },
+  {
+    label: "CAMPUS FACILITIES",
+    title: "Maintenance Requests",
+    description: "Report hostel, facility and campus maintenance issues to the appropriate university unit.",
+    href: "/maintenance",
+    icon: "wrench" as const,
+  },
+  {
+    label: "INFORMATION",
+    title: "Notices and Notifications",
+    description: "Stay informed about Student Affairs announcements, important dates and university updates.",
+    href: "/notifications",
+    icon: "bell" as const,
+  },
+  {
+    label: "STUDENT WELFARE",
+    title: "Student Support",
+    description: "Find assistance and guidance on student welfare matters and other Student Affairs services.",
+    href: "/support",
+    icon: "life-buoy" as const,
+  },
+  {
+    label: "UNIVERSITY DIRECTORY",
+    title: "Student Affairs Units",
+    description: "Find the offices and units responsible for student services and administrative support.",
+    href: "/units",
+    icon: "building" as const,
+  },
+  {
+    label: "DOCUMENT AUTHENTICATION",
+    title: "Document Verification",
+    description: "Use the portal to verify official documents issued through supported university services.",
+    href: "/verify",
+    icon: "shield-check" as const,
+  },
+];
+
+async function getStatistics() {
   try {
-    const db = await supabaseServer();
+    const supabase = await supabaseServer();
 
-    const count = async (table: string) => {
-      const { count, error } = await db
-        .from(table)
-        .select("*", { count: "exact", head: true });
-
-      return error ? 0 : count ?? 0;
-    };
-
-    const [hostels, beds, orgs] = await Promise.all([
-      count("hostels"),
-      count("bed_spaces"),
-      count("organisations"),
+    const [hostels, bedSpaces, organisations] = await Promise.all([
+      supabase.from("hostels").select("*", { count: "exact", head: true }),
+      supabase.from("bed_spaces").select("*", { count: "exact", head: true }),
+      supabase.from("organisations").select("*", { count: "exact", head: true }),
     ]);
 
-    return { hostels, beds, orgs };
-  } catch {
-    return { hostels: 0, beds: 0, orgs: 0 };
+    return {
+      hostels: hostels.count ?? 0,
+      bedSpaces: bedSpaces.count ?? 0,
+      organisations: organisations.count ?? 0,
+    };
+  } catch (error) {
+    console.error("Unable to load homepage statistics:", error);
+
+    return {
+      hostels: 0,
+      bedSpaces: 0,
+      organisations: 0,
+    };
   }
 }
 
+function formatDate(value?: string) {
+  if (!value) return "UNIVERSITY UPDATE";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "UNIVERSITY UPDATE";
+
+  return new Intl.DateTimeFormat("en-NG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
 export default async function Home() {
-  // Fetch homepage content from Sanity and Supabase
   const [hero, news, totals, dean] = await Promise.all([
     getHero(),
     getNotices(3),
-    counts(),
+    getStatistics(),
     getDean(),
   ]);
 
-  // Prepare a clean Dean's Message preview
-  const deanPreview =
-    dean?.message && typeof dean.message === "string"
-      ? cleanDeanMessage(dean.message)
-      : "";
+  const heroHeadline =
+    hero?.headline || "Supporting Every Student, Every Step of the Way";
 
-  // Homepage statistics
-  const stats: [string, string][] = [
-    [String(units.length), "Student Affairs units"],
-    ...(totals.hostels
-      ? [[String(totals.hostels), "Hostels"] as [string, string]]
-      : []),
-    ...(totals.beds
-      ? [[String(totals.beds), "Bed spaces"] as [string, string]]
-      : []),
-    ...(totals.orgs
-      ? [[String(totals.orgs), "Student organisations"] as [string, string]]
-      : []),
-  ];
+  const heroDescription =
+    hero?.subheadline ||
+    "Welcome to the Plateau State University Student Affairs Portal. Access student services, accommodation, clearance, welfare support and important university information in one place.";
 
-  // Hero background
-  const heroStyle = hero?.imageUrl
+  const heroStyle: CSSProperties = hero?.imageUrl
     ? {
-        backgroundImage: `linear-gradient(90deg, rgba(4, 43, 25, .94) 0%, rgba(4, 43, 25, .78) 55%, rgba(4, 43, 25, .45) 100%), url("${hero.imageUrl}")`,
+        backgroundImage: `linear-gradient(90deg, rgba(4,43,25,.94) 0%, rgba(4,43,25,.78) 55%, rgba(4,43,25,.52) 100%), url("${hero.imageUrl}")`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
       }
     : {};
 
+  const unitItems = Array.isArray(units) ? units : [];
+
   return (
     <div className="homepage">
-      {/* HERO */}
+
+      {/* 1. HERO */}
       <section className="home-hero" style={heroStyle}>
         <div className="home-hero-overlay" />
+        <div className="home-container">
+          <div className="home-hero-content">
+            <div className="home-eyebrow">
+              <span className="home-eyebrow-dot" />
+              PLATEAU STATE UNIVERSITY
+            </div>
 
-        <div className="home-container home-hero-content">
-          <span className="home-eyebrow">
-            <span className="home-eyebrow-dot" />
-            PLATEAU STATE UNIVERSITY &middot; BOKKOS
-          </span>
+            <h1>{heroHeadline}</h1>
+            <p className="home-hero-description">{heroDescription}</p>
 
-          <h1>
-            {hero?.headline ?? "Your campus life, in one place."}
-          </h1>
+            <div className="home-hero-actions">
+              <a
+                href={hero?.ctaUrl || "/dashboard"}
+                className="home-btn-primary"
+              >
+                {hero?.ctaLabel || "Access Student Portal"}
+                <Icon name="arrow-right" />
+              </a>
 
-          <p className="home-hero-description">
-            {hero?.subheadline ??
-              "Access essential student services, manage your campus experience and stay connected with Student Affairs."}
-          </p>
+              <a href="/support" className="home-btn-outline">
+                Student Support
+                <Icon name="arrow-up-right" />
+              </a>
+            </div>
 
-          <div className="home-hero-actions">
-            <a
-              className="home-btn-primary"
-              href={hero?.ctaUrl ?? "/hostels"}
-            >
-              {hero?.ctaLabel ?? "Explore student services"}
-              <Icon name="arrow" />
-            </a>
-
-            <a className="home-btn-outline" href="/units">
-              Discover our units
-            </a>
-          </div>
-
-          <div className="home-hero-note">
-            <span>✓</span> One portal for your university experience
+            <div className="home-hero-note">
+              <span><Icon name="check-circle" /></span>
+              Your university services, accessible in one place.
+            </div>
           </div>
         </div>
       </section>
 
-      {/* QUICK ACCESS */}
-      <section className="home-quick-section" aria-label="Quick access">
+      {/* 2. STATISTICS */}
+      <section className="home-stats">
+        <div className="home-container">
+          <div className="home-stats-grid">
+            <div className="home-stat">
+              <strong>{totals.hostels.toLocaleString("en-NG")}</strong>
+              <span>Hostels Listed</span>
+            </div>
+
+            <div className="home-stat">
+              <strong>{totals.bedSpaces.toLocaleString("en-NG")}</strong>
+              <span>Accommodation Spaces</span>
+            </div>
+
+            <div className="home-stat">
+              <strong>{totals.organisations.toLocaleString("en-NG")}</strong>
+              <span>Student Organisations</span>
+            </div>
+
+            <div className="home-stat">
+              <strong>24/7</strong>
+              <span>Online Portal Access</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. DEAN'S MESSAGE */}
+      {dean && (
+        <section className="home-about-section">
+          <div className="home-container">
+            <div className="home-about-grid">
+
+              <div className="home-about-image">
+                {dean.photoUrl ? (
+                  <img
+                    src={dean.photoUrl}
+                    alt={dean.name || "Dean"}
+                    className="home-about-photo"
+                  />
+                ) : (
+                  <div className="home-about-photo-placeholder">
+                    <span>PLASU</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="home-about-content">
+                <span className="home-about-eyebrow">
+                  A MESSAGE FROM THE DEAN
+                </span>
+
+                <h2>Dean’s Message</h2>
+                <h3>{dean.name}</h3>
+
+                <p className="home-about-title">
+                  {dean.title}
+                </p>
+
+                <div className="home-about-divider" />
+
+                <div className="home-about-message">
+                  {dean.message}
+                </div>
+
+                <a href="/about/dean" className="home-about-link">
+                  Read the Dean’s Full Message →
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 4. QUICK ACCESS */}
+      <section className="home-quick-section">
         <div className="home-container">
           <div className="home-quick-heading">
             <div>
-              <span className="home-section-kicker">GET THINGS DONE</span>
-              <h2>Quick access</h2>
+              <span className="home-section-kicker">GET STARTED</span>
+              <h2>Quick Access</h2>
             </div>
 
-            <p>Your most-used services, just one click away.</p>
+            <p>
+              Find the student services and resources you need without delay.
+            </p>
           </div>
 
           <div className="home-quick-grid">
             {quick.map((item) => (
-              <a
-                className="home-quick-card"
-                href={item.href}
-                key={item.href}
-              >
+              <a href={item.href} className="home-quick-card" key={item.title}>
                 <span className="home-icon-box">
                   <Icon name={item.icon} />
                 </span>
@@ -369,7 +384,7 @@ export default async function Home() {
                 </span>
 
                 <span className="home-quick-arrow">
-                  <Icon name="arrow" />
+                  <Icon name="arrow-right" />
                 </span>
               </a>
             ))}
@@ -377,305 +392,292 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* STATISTICS */}
-      {stats.length >= 3 && (
-        <section
-          className="home-stats"
-          aria-label="Student Affairs at a glance"
-        >
-          <div className="home-container home-stats-grid">
-            {stats.map(([value, label]) => (
-              <div className="home-stat" key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
+      {/* 5. MAIN HOMEPAGE CONTENT */}
+      <main className="home-main">
+        <div className="home-container">
+
+          {/* STUDENT AFFAIRS SERVICES */}
+          <section className="home-section">
+            <div className="home-section-heading">
+              <div>
+                <span className="home-section-kicker">WHAT WE OFFER</span>
+                <h2>Student Affairs Services</h2>
+                <p>
+                  Access essential services and support provided through the
+                  Student Affairs Division.
+                </p>
               </div>
-            ))}
-          </div>
-        </section>
-      )}
 
-      <main className="home-main home-container" id="services">
-        {/* SERVICES */}
-        <section className="home-section">
-          <div className="home-section-heading">
-            <div>
-              <span className="home-section-kicker">HERE FOR YOU</span>
-              <h2>Student Affairs services</h2>
-              <p>
-                Everything you need to make your university experience easier.
-              </p>
+              <a href="/units" className="home-text-link">
+                Explore all units <Icon name="arrow-right" />
+              </a>
             </div>
 
-            <a className="home-text-link" href="#service-list">
-              Explore services <Icon name="arrow" />
-            </a>
-          </div>
+            <div className="home-services-grid">
+              {services.map((service) => (
+                <a
+                  href={service.href}
+                  className="home-service-card"
+                  key={service.title}
+                >
+                  <div className="home-service-top">
+                    <span className="home-icon-box">
+                      <Icon name={service.icon} />
+                    </span>
 
-          <div className="home-services-grid" id="service-list">
-            {services.map((service) => (
-              <a
-                className="home-service-card"
-                href={service.href}
-                key={service.href}
-              >
-                <div className="home-service-top">
-                  <span className="home-icon-box">
-                    <Icon name={service.icon} />
-                  </span>
-
-                  <span className="home-service-arrow">
-                    <Icon name="arrow" />
-                  </span>
-                </div>
-
-                <span className="home-service-label">
-                  {service.label}
-                </span>
-
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* UNITS */}
-        <section className="home-section">
-          <div className="home-section-heading">
-            <div>
-              <span className="home-section-kicker">
-                OUR ADMINISTRATION
-              </span>
-              <h2>Meet our units</h2>
-              <p>
-                Dedicated teams working to support students across the
-                university.
-              </p>
-            </div>
-
-            <a className="home-text-link" href="/units">
-              All units <Icon name="arrow" />
-            </a>
-          </div>
-
-          <div className="home-units-grid">
-            {units.map((unit, index) => (
-              <a
-                className="home-unit-card"
-                href={`/units/${unit.slug}`}
-                key={unit.slug}
-              >
-                <span className="home-unit-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                <div>
-                  <h3>{unit.name}</h3>
-                  <p>{unit.summary}</p>
-                </div>
-
-                <span className="home-unit-arrow">
-                  <Icon name="arrow" />
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* ABOUT THE DEAN / DIRECTOR */}
-        {dean && (
-          <section className="home-section home-about-section">
-            <div className="home-about-grid">
-              <div className="home-about-image">
-                {dean.photoUrl ? (
-                  <img
-                    src={dean.photoUrl}
-                    alt={dean.name || "Dean or Director"}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="home-about-image-placeholder">
-                    <Icon name="users" />
+                    <span className="home-service-arrow">
+                      <Icon name="arrow-up-right" />
+                    </span>
                   </div>
-                )}
+
+                  <span className="home-service-label">{service.label}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* 6. STUDENT AFFAIRS UNITS */}
+          <section className="home-section">
+            <div className="home-section-heading">
+              <div>
+                <span className="home-section-kicker">OUR STRUCTURE</span>
+                <h2>Student Affairs Units</h2>
+                <p>
+                  Connect with the units responsible for student welfare,
+                  administration and campus services.
+                </p>
               </div>
 
-              <div className="home-about-content">
-                <span className="home-section-kicker">
-                  LEADERSHIP AND VISION
-                </span>
+              <a href="/units" className="home-text-link">
+                View all units <Icon name="arrow-right" />
+              </a>
+            </div>
 
-                <h2>Message from the Dean</h2>
+            <div className="home-units-grid">
+              {unitItems.length > 0 ? (
+                unitItems.slice(0, 6).map((unit: any, index: number) => {
+                  const name =
+                    typeof unit === "string"
+                      ? unit
+                      : unit.name || unit.title || unit.label || "Student Affairs Unit";
 
-                {dean.name && <h3>{dean.name}</h3>}
+                  const description =
+                    typeof unit === "object"
+                      ? unit.description || unit.summary ||
+                        "Student Affairs administrative and support services."
+                      : "Student Affairs administrative and support services.";
 
-                {dean.title && (
-                  <span className="home-about-title">
-                    {dean.title}
+                  const href =
+                    typeof unit === "object"
+                      ? unit.href || unit.url ||
+                        (unit.slug ? `/units/${unit.slug}` : "/units")
+                      : "/units";
+
+                  return (
+                    <a
+                      href={href}
+                      className="home-unit-card"
+                      key={unit.id || unit.slug || name}
+                    >
+                      <span className="home-unit-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span>
+                        <h3>{name}</h3>
+                        <p>{description}</p>
+                      </span>
+
+                      <span className="home-unit-arrow">
+                        <Icon name="arrow-right" />
+                      </span>
+                    </a>
+                  );
+                })
+              ) : (
+                <a href="/units" className="home-unit-card">
+                  <span className="home-unit-number">01</span>
+                  <span>
+                    <h3>Student Affairs Directory</h3>
+                    <p>
+                      View the university's Student Affairs units and their
+                      services.
+                    </p>
                   </span>
-                )}
-
-                {deanPreview && (
-                  <p className="home-about-message">
-                    {deanPreview}
-                  </p>
-                )}
-
-                <a href="/about/dean" className="home-about-link">
-                  Read the Dean's full message <Icon name="arrow" />
+                  <span className="home-unit-arrow">
+                    <Icon name="arrow-right" />
+                  </span>
                 </a>
+              )}
+            </div>
+          </section>
+
+          {/* 7. HOW IT WORKS */}
+          <section className="home-how-section">
+            <div className="home-section-heading">
+              <div>
+                <span className="home-section-kicker">
+                  SIMPLE AND CONVENIENT
+                </span>
+                <h2>How to Use the Portal</h2>
+                <p>
+                  Getting the student services you need is straightforward.
+                </p>
+              </div>
+            </div>
+
+            <div className="home-steps-grid">
+              <div className="home-step">
+                <span className="home-step-number">01</span>
+                <h3>Access the Portal</h3>
+                <p>
+                  Open the Student Affairs Portal and navigate to the service
+                  you need.
+                </p>
+              </div>
+
+              <div className="home-step">
+                <span className="home-step-number">02</span>
+                <h3>Submit Your Request</h3>
+                <p>
+                  Provide the required information and submit your request
+                  through the appropriate service.
+                </p>
+              </div>
+
+              <div className="home-step">
+                <span className="home-step-number">03</span>
+                <h3>Track and Get Support</h3>
+                <p>
+                  Follow up on your request and contact Student Affairs when
+                  you need assistance.
+                </p>
               </div>
             </div>
           </section>
-        )}
 
-        {/* HOW IT WORKS */}
-        <section className="home-how-section">
-          <div className="home-section-heading">
-            <div>
-              <span className="home-section-kicker">
-                SIMPLE AND CONVENIENT
-              </span>
-              <h2>How it works</h2>
-              <p>Getting started with Student Affairs is simple.</p>
-            </div>
-          </div>
-
-          <div className="home-steps-grid">
-            <article className="home-step">
-              <span className="home-step-number">01</span>
-              <h3>Create your account</h3>
-              <p>
-                Register with your matriculation number and email. You only
-                need to do this once.
-              </p>
-            </article>
-
-            <article className="home-step">
-              <span className="home-step-number">02</span>
-              <h3>Access student services</h3>
-              <p>
-                Apply for accommodation, start clearance, request letters
-                and access other services.
-              </p>
-            </article>
-
-            <article className="home-step">
-              <span className="home-step-number">03</span>
-              <h3>Track your progress</h3>
-              <p>
-                Follow your requests, monitor their status and receive
-                important university notices.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        {/* LATEST NEWS */}
-        {news.length > 0 && (
+          {/* 8. LATEST NEWS */}
           <section className="home-section">
             <div className="home-section-heading">
               <div>
                 <span className="home-section-kicker">STAY INFORMED</span>
-                <h2>Latest announcements</h2>
+                <h2>Latest News and Announcements</h2>
                 <p>
-                  News and important updates from Student Affairs.
+                  Keep up with important notices, updates and activities from
+                  Student Affairs.
                 </p>
               </div>
 
-              <a className="home-text-link" href="/news">
-                All announcements <Icon name="arrow" />
+              <a href="/news" className="home-text-link">
+                View all news <Icon name="arrow-right" />
               </a>
             </div>
 
             <div className="home-news-grid">
-              {news.map((item: any) => (
-                <article
-                  className="home-news-card"
-                  key={item.slug || item.title}
-                >
-                  <a
-                    href={item.slug ? `/news/${item.slug}` : "/news"}
-                    className="home-news-image-link"
-                    aria-label={`Read ${item.title}`}
+              {news && news.length > 0 ? (
+                news.slice(0, 3).map((item: any, index: number) => (
+                  <article
+                    className="home-news-card"
+                    key={item.slug || item.title || index}
                   >
-                    {item.imageUrl ? (
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title || "Student Affairs announcement"}
-                        className="home-news-image"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="home-news-image-placeholder">
-                        <Icon name="file" />
-                        <span>Student Affairs News</span>
-                      </div>
-                    )}
-                  </a>
+                    <a
+                      href={item.slug ? `/news/${item.slug}` : "/news"}
+                      className="home-news-image-link"
+                      aria-label={`Read ${item.title}`}
+                    >
+                      {item.imageUrl ? (
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title || "Student Affairs announcement"}
+                          className="home-news-image"
+                        />
+                      ) : (
+                        <div className="home-news-image-placeholder">
+                          <Icon name="building" />
+                          <span>PLASU Student Affairs</span>
+                        </div>
+                      )}
+                    </a>
+
+                    <div className="home-news-content">
+                      <span className="home-news-date">
+                        {formatDate(item.date)}
+                      </span>
+
+                      <h3>
+                        <a href={item.slug ? `/news/${item.slug}` : "/news"}>
+                          {item.title}
+                        </a>
+                      </h3>
+
+                      <p>
+                        {item.summary ||
+                          "Read the latest update from the Student Affairs Division."}
+                      </p>
+
+                      <a
+                        href={item.slug ? `/news/${item.slug}` : "/news"}
+                        className="home-news-link"
+                      >
+                        Read announcement <Icon name="arrow-right" />
+                      </a>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <article className="home-news-card">
+                  <div className="home-news-image-link">
+                    <div className="home-news-image-placeholder">
+                      <Icon name="bell" />
+                      <span>University Announcements</span>
+                    </div>
+                  </div>
 
                   <div className="home-news-content">
-                    <div className="home-news-date">
-                      {item.date &&
-                      !Number.isNaN(new Date(item.date).getTime())
-                        ? new Date(item.date).toLocaleDateString("en-NG", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })
-                        : "Student Affairs update"}
-                    </div>
-
-                    <h3>
-                      <a href={item.slug ? `/news/${item.slug}` : "/news"}>
-                        {item.title}
-                      </a>
-                    </h3>
-
-                    {item.summary && <p>{item.summary}</p>}
-
-                    <a
-                      className="home-news-link"
-                      href={item.slug ? `/news/${item.slug}` : "/news"}
-                    >
-                      Read announcement <Icon name="arrow" />
+                    <span className="home-news-date">STAY INFORMED</span>
+                    <h3>Student Affairs Updates</h3>
+                    <p>
+                      Important notices and announcements will appear here
+                      when they are published.
+                    </p>
+                    <a href="/news" className="home-news-link">
+                      Visit news and announcements <Icon name="arrow-right" />
                     </a>
                   </div>
                 </article>
-              ))}
+              )}
             </div>
           </section>
-        )}
 
-        {/* SUPPORT CTA */}
-        <section className="home-support">
-          <div className="home-support-icon">
-            <Icon name="life" />
-          </div>
+          {/* 9. SUPPORT CTA */}
+          <section className="home-support">
+            <div className="home-support-icon">
+              <Icon name="life-buoy" />
+            </div>
 
-          <div className="home-support-content">
-            <span className="home-section-kicker">
-              WE ARE HERE TO HELP
-            </span>
+            <div className="home-support-content">
+              <span className="home-section-kicker">WE ARE HERE TO HELP</span>
+              <h2>Need Assistance?</h2>
+              <p>
+                Have a question or need help with a Student Affairs service?
+                Contact the support team for assistance.
+              </p>
+            </div>
 
-            <h2>Need assistance?</h2>
+            <div className="home-support-actions">
+              <a href="/support" className="home-btn-primary">
+                Get Student Support <Icon name="arrow-right" />
+              </a>
 
-            <p>
-              Have a question or need help with a student service? Our team
-              is ready to assist you.
-            </p>
-          </div>
+              <a href="/contact" className="home-support-secondary">
+                Contact the University
+              </a>
+            </div>
+          </section>
 
-          <div className="home-support-actions">
-            <a className="home-btn-primary" href="/contact">
-              Contact Student Affairs <Icon name="arrow" />
-            </a>
-
-            <a className="home-support-secondary" href="/faq">
-              Browse frequently asked questions
-            </a>
-          </div>
-        </section>
+        </div>
       </main>
     </div>
   );

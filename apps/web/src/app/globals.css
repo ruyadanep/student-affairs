@@ -1403,3 +1403,503 @@ form label.block > span.block { margin-bottom: .25rem; }
     height: 220px;
   }
 }
+
+/* =========================================
+   DEAN'S MESSAGE — HOMEPAGE
+========================================= */
+
+.home-about-section {
+  width: 100%;
+  padding: 85px 0;
+  background: #f5f8f3;
+}
+
+.home-about-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 65px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.home-about-image {
+  width: 100%;
+  max-width: 430px;
+  height: 490px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e6eee3;
+  box-shadow: 0 15px 40px rgba(20, 60, 25, 0.12);
+}
+
+.home-about-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-about-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #176b32;
+  font-size: 32px;
+  font-weight: 800;
+  background: #e6eee3;
+}
+
+.home-about-content {
+  padding: 15px 0;
+}
+
+.home-about-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #b28a19;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.home-about-content h2 {
+  margin: 0 0 22px;
+  color: #176b32;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.home-about-content h3 {
+  margin: 0 0 7px;
+  color: #222d23;
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.home-about-title {
+  margin: 0;
+  color: #687568;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-about-divider {
+  width: 65px;
+  height: 4px;
+  margin: 24px 0;
+  border-radius: 5px;
+  background: #e5b82d;
+}
+
+.home-about-message {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+  overflow: hidden;
+  line-height: 1.8;
+  max-height: 230px;
+  color: #4b574c;
+  font-size: 15px;
+}
+
+.home-about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 13px 21px;
+  border-radius: 5px;
+  background: #176b32;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.home-about-link:hover {
+  background: #105324;
+  transform: translateY(-2px);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .home-about-grid {
+    grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.15fr);
+    gap: 35px;
+  }
+
+  .home-about-image {
+    height: 420px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .home-about-section {
+    padding: 55px 0;
+  }
+
+  .home-about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .home-about-image {
+    width: 100%;
+    max-width: 100%;
+    height: 380px;
+  }
+
+  .home-about-content {
+    padding: 0;
+  }
+
+  .home-about-content h2 {
+    font-size: 30px;
+  }
+
+  .home-about-content h3 {
+    font-size: 20px;
+  }
+
+  .home-about-message {
+    font-size: 14px;
+  }
+}
+
+
+/* Dean's Message — balanced image and text */
+
+.home-about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: stretch;
+  gap: 55px;
+}
+
+.home-about-image {
+  height: 460px;
+  overflow: hidden;
+}
+
+.home-about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.home-about-content {
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.home-about-message {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  line-height: 1.8;
+  max-height: 230px;
+  color: #4b574c;
+  font-size: 15px;
+}
+
+.home-about-message {
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  max-height: 180px;
+}
+
+.home-about-link {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 650px) {
+  .home-about-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .home-about-image {
+    height: 350px;
+  }
+
+  .home-about-content {
+    height: auto;
+    overflow: visible;
+  }
+
+  .home-about-message {
+    
+    max-height: 180px;
+  }
+
+  .home-about-link {
+    margin-top: 20px;
+  }
+}
+
+
+/* =========================================
+   HOMEPAGE — REDUCE QUICK ACCESS GAP
+========================================= */
+
+.home-quick-section {
+  padding-bottom: 35px !important;
+  margin-bottom: 0 !important;
+}
+
+.home-main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.home-main > .home-container > .home-section:first-child {
+  padding-top: 25px !important;
+  margin-top: 0 !important;
+}
+
+/* Keep the section heading compact */
+.home-main > .home-container > .home-section:first-child
+.home-section-heading {
+  margin-top: 0 !important;
+}
+
+/* =========================================
+   STUDENT AFFAIRS – MULTICOLOUR HOMEPAGE TILES
+========================================= */
+
+/* Quick Access tiles */
+.home-quick-card:nth-child(8n+1) {
+  background: #E8F1FF !important;
+  border-color: #B9D2F5 !important;
+}
+
+.home-quick-card:nth-child(8n+2) {
+  background: #E7F7EF !important;
+  border-color: #B5E2C9 !important;
+}
+
+.home-quick-card:nth-child(8n+3) {
+  background: #FFF3DC !important;
+  border-color: #F3D69A !important;
+}
+
+.home-quick-card:nth-child(8n+4) {
+  background: #F5EAFE !important;
+  border-color: #DCC5F2 !important;
+}
+
+.home-quick-card:nth-child(8n+5) {
+  background: #FFE9E8 !important;
+  border-color: #F4C3C0 !important;
+}
+
+.home-quick-card:nth-child(8n+6) {
+  background: #E4F7F7 !important;
+  border-color: #B5E2E2 !important;
+}
+
+.home-quick-card:nth-child(8n+7) {
+  background: #F1F2E5 !important;
+  border-color: #D9DDBB !important;
+}
+
+.home-quick-card:nth-child(8n+8) {
+  background: #FCEAF2 !important;
+  border-color: #EEC6D8 !important;
+}
+
+
+/* Student Affairs Services tiles */
+.home-service-card:nth-child(8n+1) {
+  background: #E8F1FF !important;
+  border-color: #B9D2F5 !important;
+}
+
+.home-service-card:nth-child(8n+2) {
+  background: #E7F7EF !important;
+  border-color: #B5E2C9 !important;
+}
+
+.home-service-card:nth-child(8n+3) {
+  background: #FFF3DC !important;
+  border-color: #F3D69A !important;
+}
+
+.home-service-card:nth-child(8n+4) {
+  background: #F5EAFE !important;
+  border-color: #DCC5F2 !important;
+}
+
+.home-service-card:nth-child(8n+5) {
+  background: #FFE9E8 !important;
+  border-color: #F4C3C0 !important;
+}
+
+.home-service-card:nth-child(8n+6) {
+  background: #E4F7F7 !important;
+  border-color: #B5E2E2 !important;
+}
+
+.home-service-card:nth-child(8n+7) {
+  background: #F1F2E5 !important;
+  border-color: #D9DDBB !important;
+}
+
+.home-service-card:nth-child(8n+8) {
+  background: #FCEAF2 !important;
+  border-color: #EEC6D8 !important;
+}
+
+
+/* Student Affairs Units tiles */
+.home-unit-card:nth-child(8n+1) {
+  background: #E8F1FF !important;
+  border-color: #B9D2F5 !important;
+}
+
+.home-unit-card:nth-child(8n+2) {
+  background: #E7F7EF !important;
+  border-color: #B5E2C9 !important;
+}
+
+.home-unit-card:nth-child(8n+3) {
+  background: #FFF3DC !important;
+  border-color: #F3D69A !important;
+}
+
+.home-unit-card:nth-child(8n+4) {
+  background: #F5EAFE !important;
+  border-color: #DCC5F2 !important;
+}
+
+.home-unit-card:nth-child(8n+5) {
+  background: #FFE9E8 !important;
+  border-color: #F4C3C0 !important;
+}
+
+.home-unit-card:nth-child(8n+6) {
+  background: #E4F7F7 !important;
+  border-color: #B5E2E2 !important;
+}
+
+.home-unit-card:nth-child(8n+7) {
+  background: #F1F2E5 !important;
+  border-color: #D9DDBB !important;
+}
+
+.home-unit-card:nth-child(8n+8) {
+  background: #FCEAF2 !important;
+  border-color: #EEC6D8 !important;
+}
+
+
+/* Shared tile appearance */
+.home-quick-card,
+.home-service-card,
+.home-unit-card {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-radius: 16px !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.home-quick-card:hover,
+.home-service-card:hover,
+.home-unit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.09) !important;
+}
+
+/* =========================================
+   PLASU STUDENT AFFAIRS
+   PREMIUM HOMEPAGE SECTION BACKGROUNDS
+========================================= */
+
+.home-quick-section {
+  background: #f3f6fc !important;
+  padding-top: 55px !important;
+  padding-bottom: 55px !important;
+}
+
+.home-main {
+  background: #ffffff;
+}
+
+/* Statistics */
+.home-main > .home-container > .home-stats-section {
+  background: #f2f6f1 !important;
+  border-radius: 22px;
+  padding: 35px !important;
+}
+
+/* Dean's message */
+.home-about-section {
+  background: #fff9ec !important;
+  border-radius: 24px;
+  padding: 45px !important;
+}
+
+/* Services */
+.home-main > .home-container > .home-services-section {
+  background: #ffffff !important;
+}
+
+/* Units */
+.home-main > .home-container > .home-units-section {
+  background: #f1f7f2 !important;
+  border-radius: 24px;
+  padding: 45px !important;
+}
+
+/* How to use portal */
+.home-main > .home-container > .home-how-section {
+  background: #f5f2fc !important;
+  border-radius: 24px;
+  padding: 45px !important;
+}
+
+/* News */
+.home-main > .home-container > .home-news-section {
+  background: #f8f9fb !important;
+  border-radius: 24px;
+  padding: 45px !important;
+}
+
+/* Smooth transitions */
+.home-quick-section,
+.home-about-section,
+.home-stats-section,
+.home-services-section,
+.home-units-section,
+.home-how-section,
+.home-news-section {
+  transition: background 0.3s ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .home-about-section,
+  .home-units-section,
+  .home-how-section,
+  .home-news-section,
+  .home-stats-section {
+    padding: 24px 16px !important;
+    border-radius: 16px;
+  }
+}
+
