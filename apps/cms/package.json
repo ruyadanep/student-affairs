@@ -1,2 +1,1 @@
-{ "name": "cms", "version": "0.1.0", "private": true, "scripts": { "dev": "sanity dev", "build": "sanity build" },
-  "dependencies": { "sanity": "^3.60.0", "react": "^19.0.0", "react-dom": "^19.0.0" } }
+{"name":"cms","version":"0.1.0","private":true,"scripts":{"dev":"sanity dev","build":"sanity build"},"dependencies":{"react":"^19.0.0","react-dom":"^19.0.0","sanity":"^3.60.0","styled-components":"^6.6.0"},"devDependencies":{"@types/node":"^22.20.5"}}
